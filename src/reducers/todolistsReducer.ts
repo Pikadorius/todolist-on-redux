@@ -1,14 +1,14 @@
 import {FilterValuesType, TodolistType} from '../App';
 
+// initial state for reducer
 const initialState: TodolistType[] = [
     {id: 'firstToDo', title: "What to learn", filter: "all"},
     {id: 'secondToDo', title: "What to buy", filter: "all"}
 ]
-
+// if state comes - use it, esle - use initial state
 export const todolistsReducer = (state: TodolistType[]=initialState, action: TodoActionsType) => {
     switch (action.type) {
         case 'ADD-TODOLIST': {
-            debugger
             let newTodolist: TodolistType = {
                 id: action.payload.newTodolistId,
                 title: action.payload.title,
@@ -17,7 +17,6 @@ export const todolistsReducer = (state: TodolistType[]=initialState, action: Tod
             return [newTodolist, ...state];
         }
         case 'REMOVE-TODOLIST': {
-            debugger
             return state.filter((t => t.id !== action.payload.id))
         }
         case 'CHANGE-TODOLIST-TITLE': {

@@ -1,4 +1,4 @@
-import React, {useReducer} from 'react';
+import React from 'react';
 import './App.css';
 import {TaskType, Todolist} from './TodoList';
 import {v1} from 'uuid';
@@ -81,25 +81,6 @@ const App:React.FC<AppType> = ({state, dispatch}) => {
     function changeFilter(value: FilterValuesType, todolistId: string) {
         dispatch(changeTodolistFilterAC(value, todolistId))
     }
-
-    // let todolistId1 = v1();
-    // let todolistId2 = v1();
-    //
-    // let [todolists, dispatchTodolists] = useReducer(todolistsReducer,[
-    //     {id: 'firstToDo', title: "What to learn", filter: "all"},
-    //     {id: 'secondToDo', title: "What to buy", filter: "all"}
-    // ])
-    //
-    // let [tasks, dispatchTasks] = useReducer(tasksReducer,{
-    //     [todolistId1]: [
-    //         {id: v1(), title: "HTML&CSS", isDone: true},
-    //         {id: v1(), title: "JS", isDone: true}
-    //     ],
-    //     [todolistId2]: [
-    //         {id: v1(), title: "Milk", isDone: true},
-    //         {id: v1(), title: "React Book", isDone: true}
-    //     ]
-    // });
 
     return (
         <div className="App">

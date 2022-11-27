@@ -2,64 +2,67 @@ import {TasksStateType} from '../App';
 import {v1} from 'uuid';
 import {TaskType} from '../TodoList';
 
+
+// initial state for reducer
 const inititalState:TasksStateType = {
-    ['firstToDo']: [
+    'firstToDo': [
     {id: v1(), title: "HTML&CSS", isDone: true},
     {id: v1(), title: "JS", isDone: true}
 ],
-    ['secondToDo']: [
+    'secondToDo': [
     {id: v1(), title: "Milk", isDone: true},
     {id: v1(), title: "React Book", isDone: true}
 ]
 }
-
+// if state comes - use it, esle - use initial state
 export const tasksReducer = (state: TasksStateType=inititalState, action: TasksActionsType) => {
     switch (action.type) {
         case 'ADD-TASK': {
+            // create new task
             let task:TaskType = {id: v1(), title: action.payload.title, isDone: false};
-            //достанем нужный массив по todolistId:
+            // find rigth tasks
             let todolistTasks = state[action.payload.todolistId];
-            // перезапишем в этом объекте массив для нужного тудулиста копией, добавив в начало новую таску:
+            // rewrite tasks with new task
             state[action.payload.todolistId] = [task, ...todolistTasks];
-            // засетаем в стейт копию объекта, чтобы React отреагировал перерисовкой
+            // return changed tasks
             return {...state}
         }
         case 'REMOVE-TASK': {
-            //достанем нужный массив по todolistId:
+            // find rigth tasks
             let todolistTasks = state[action.payload.todolistId];
-            // перезапишем в этом объекте массив для нужного тудулиста отфилтрованным массивом:
+            // rewrite it with filtered version
             state[action.payload.todolistId] = todolistTasks.filter(t => t.id !== action.payload.id);
-            // засетаем в стейт копию объекта, чтобы React отреагировал перерисовкой
+            // return changed tasks
             return {...state}
         }
         case 'CHANGE-TASK-STATUS': {
+            // find rigth tasks
             let todolistTasks = state[action.payload.todolistId];
-            // найдём нужную таску:
+            // find right task
             let task = todolistTasks.find(t => t.id === action.payload.id);
-            //изменим таску, если она нашлась
+            // change task if you can find it
             if (task) {
                 task.isDone = action.payload.isDone;
-                // засетаем в стейт копию объекта, чтобы React отреагировал перерисовкой
+                // return changed task
                 return {...state}
             } else return state;
         }
         case 'CHANGE-TASK-TITLE': {
+            // find rigth tasks
             let todolistTasks = state[action.payload.todolistId];
-            // найдём нужную таску:
+            // find right task
             let task = todolistTasks.find(t => t.id === action.payload.id);
-            //изменим таску, если она нашлась
+            // change task if you can find it
             if (task) {
                 task.title = action.payload.newTitle;
-                // засетаем в стейт копию объекта, чтобы React отреагировал перерисовкой
+                // return changed task
                 return {...state}
             } else return state;
         }
         case 'ADD-TASKS-FOR-TODOLIST': {
-            debugger
             return {[action.payload.newTodolistId]: [], ...state}
         }
         case 'DELETE-TASKS': {
-            debugger
             delete state[action.payload.id]
             return {...state}
         }
