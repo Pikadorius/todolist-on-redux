@@ -15,8 +15,6 @@ const rerender = () => {
 
 // first render
 rerender()
-
-
 // send observer, that will rerender App if state will be changed
 store.subscribe(rerender)
 
