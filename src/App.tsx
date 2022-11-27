@@ -106,9 +106,8 @@ const App:React.FC<AppType> = ({state, dispatch}) => {
                             tasksForTodolist = allTodolistTasks.filter(t => t.isDone);
                         }
 
-                        return <Grid item>
+                        return <Grid item key={tl.id}>
                             <Paper  elevation={3} style={{padding: '20px'}}><Todolist
-                                key={tl.id}
                                 id={tl.id}
                                 title={tl.title}
                                 tasks={tasksForTodolist}

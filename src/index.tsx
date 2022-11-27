@@ -5,10 +5,11 @@ import * as serviceWorker from './serviceWorker';
 import { createRoot } from 'react-dom/client';
 import store from './redux/store';
 
+const container  = document.getElementById('root') as HTMLElement
+const root = createRoot(container);
+
 // function that renders App
 const rerender = () => {
-    const container  = document.getElementById('root') as HTMLElement
-    const root = createRoot(container);
     root.render(<App  state={store.getState()} dispatch={store.dispatch.bind(store)}/>);
 }
 
