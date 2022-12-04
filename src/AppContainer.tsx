@@ -4,9 +4,8 @@ import {Dispatch} from 'redux';
 import {AppRootState} from './redux/store';
 import {
     addTaskAC,
-    addTasksToTodolistAC,
     changeTaskStatusAC,
-    changeTaskTitleAC, deleteTasksFromTodolistAC, InititalStateType,
+    changeTaskTitleAC, InititalStateType,
     removeTaskAC
 } from './reducers/tasksReducer';
 import {v1} from 'uuid';
@@ -48,11 +47,9 @@ const mapDispacthToProps = (dispatch: Dispatch): MapDispacthType => {
         addTodolist: (title: string) => {
             let newTodolistId = v1();
             dispatch(addTodolistAC(title, newTodolistId))
-            dispatch(addTasksToTodolistAC(newTodolistId))
         },
         removeTodolist: (id: string) => {
             dispatch(removeTodolistAC(id))
-            dispatch(deleteTasksFromTodolistAC(id))
         },
         changeFilter: (value: FilterValuesType, todolistId: string) => dispatch(changeTodolistFilterAC(value, todolistId)),
         changeTodolistTitle: (id: string, title: string) => dispatch(changeTodolistTitleAC(id, title))

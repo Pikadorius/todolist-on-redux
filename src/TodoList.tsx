@@ -41,14 +41,12 @@ export function Todolist(props: PropsType) {
         props.changeTodolistTitle(props.id, title);
     }
 
-    const onAllClickHandler = () => props.changeFilter("all", props.id);
-    const onActiveClickHandler = () => props.changeFilter("active", props.id);
-    const onCompletedClickHandler = () => props.changeFilter("completed", props.id);
+    const filterHandler = (filter: FilterValuesType) =>  () => props.changeFilter(filter, props.id)
 
     return <div>
-        <h3> <EditableSpan value={props.title} onChange={changeTodolistTitle} />
+        <h3><EditableSpan value={props.title} onChange={changeTodolistTitle}/>
             <IconButton aria-label="delete" onClick={removeTodolist}>
-                <DeleteIcon />
+                <DeleteIcon/>
             </IconButton>
         </h3>
         <AddItemForm addItem={addTask}/>
@@ -67,9 +65,9 @@ export function Todolist(props: PropsType) {
 
                     return <li key={t.id} className={t.isDone ? "is-done" : ""}>
                         <Checkbox onChange={onChangeHandler} checked={t.isDone}/>
-                        <EditableSpan value={t.title} onChange={onTitleChangeHandler} />
+                        <EditableSpan value={t.title} onChange={onTitleChangeHandler}/>
                         <IconButton aria-label="delete" onClick={onClickHandler}>
-                            <DeleteIcon />
+                            <DeleteIcon/>
                         </IconButton>
                     </li>
                 })
@@ -77,13 +75,14 @@ export function Todolist(props: PropsType) {
         </ul>
         <div>
             <ButtonGroup>
-                <Button size='small' variant={props.filter === 'all' ?"contained": 'outlined'} color="warning" onClick={onAllClickHandler}>All</Button>
+                <Button size='small' variant={props.filter === 'all' ? "contained" : 'outlined'} color="warning"
+                        onClick={filterHandler('all')}>All</Button>
 
                 <Button size='small' variant={props.filter === 'active' ? "contained" : 'outlined'} color="error"
-                        onClick={onActiveClickHandler}>Active</Button>
+                        onClick={filterHandler('active')}>Active</Button>
 
-                <Button size='small' variant={props.filter === 'completed' ?"contained": 'outlined'} color='success'
-                        onClick={onCompletedClickHandler}>Completed</Button>
+                <Button size='small' variant={props.filter === 'completed' ? "contained" : 'outlined'} color='success'
+                        onClick={filterHandler('completed')}>Completed</Button>
             </ButtonGroup>
         </div>
     </div>
