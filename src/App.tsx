@@ -1,108 +1,58 @@
 import React from 'react';
 import './App.css';
 import {Todolist} from './TodoList';
-import {v1} from 'uuid';
 import {AddItemForm} from './AddItemForm';
 import ButtonAppBar from './ButtonAppBar';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
-import {
-    addTodolistAC,
-    changeTodolistFilterAC,
-    changeTodolistTitleAC, FilterValuesType,
-    removeTodolistAC
-} from './reducers/todolistsReducer';
-import {
-    addTaskAC,
-    addTasksToTodolistAC, changeTaskStatusAC,
-    changeTaskTitleAC,
-    deleteTasksFromTodolistAC,
-    removeTaskAC
-} from './reducers/tasksReducer';
 import {AppType} from './AppContainer';
 
 
-
-const App:React.FC<AppType> = ({state, dispatch}) => {
-
-    function removeTask(id: string, todolistId: string) {
-        dispatch(removeTaskAC(id, todolistId))
-    }
-
-    function addTask(title: string, todolistId: string) {
-        dispatch(addTaskAC(title, todolistId))
-    }
-
-    function changeStatus(id: string, isDone: boolean, todolistId: string) {
-        dispatch(changeTaskStatusAC(id, isDone, todolistId))
-    }
-
-    function changeTaskTitle(id: string, newTitle: string, todolistId: string) {
-        dispatch(changeTaskTitleAC(id, newTitle,todolistId))
-    }
-
-
-    function addTodolist(title: string) {
-        let newTodolistId = v1();
-        dispatch(addTodolistAC(title,newTodolistId))
-        dispatch(addTasksToTodolistAC(newTodolistId))
-    }
-
-    function removeTodolist(id: string) {
-        dispatch(removeTodolistAC(id))
-        dispatch(deleteTasksFromTodolistAC(id))
-    }
-
-    function changeTodolistTitle(id: string, title: string) {
-        dispatch(changeTodolistTitleAC(id, title))
-    }
-
-    function changeFilter(value: FilterValuesType, todolistId: string) {
-        dispatch(changeTodolistFilterAC(value, todolistId))
-    }
+const App: React.FC<AppType> = (props) => {
 
     return (
         <div className="App">
             <ButtonAppBar/>
             <Container fixed>
-                <Grid container >
-                    <Paper style={{margin: '20px'}}  elevation={3}><AddItemForm addItem={addTodolist}/></Paper>
-                    <button onClick={()=> {
-                        console.log(state.tasks)
-                        console.log(state.todolists)
-                    }}>log</button>
+                <Grid container>
+                    <Paper style={{margin: '20px'}} elevation={3}><AddItemForm addItem={props.addTodolist}/></Paper>
+                    <button onClick={() => {
+                        console.log(props.tasks)
+                        console.log(props.todolists)
+                    }}>log
+                    </button>
                 </Grid>
                 <Grid container spacing={3}>
-                {
-                    state.todolists.map(tl => {
-                        let allTodolistTasks = state.tasks[tl.id];
-                        let tasksForTodolist = allTodolistTasks;
+                    {
+                        props.todolists.map(tl => {
+                            let allTodolistTasks = props.tasks[tl.id];
+                            let tasksForTodolist = allTodolistTasks;
 
-                        if (tl.filter === "active") {
-                            tasksForTodolist = allTodolistTasks.filter(t => !t.isDone);
-                        }
-                        if (tl.filter === "completed") {
-                            tasksForTodolist = allTodolistTasks.filter(t => t.isDone);
-                        }
+                            if (tl.filter === "active") {
+                                tasksForTodolist = allTodolistTasks.filter(t => !t.isDone);
+                            }
+                            if (tl.filter === "completed") {
+                                tasksForTodolist = allTodolistTasks.filter(t => t.isDone);
+                            }
 
-                        return <Grid item key={tl.id}>
-                            <Paper  elevation={3} style={{padding: '20px'}}><Todolist
-                                id={tl.id}
-                                title={tl.title}
-                                tasks={tasksForTodolist}
-                                removeTask={removeTask}
-                                changeFilter={changeFilter}
-                                addTask={addTask}
-                                changeTaskStatus={changeStatus}
-                                filter={tl.filter}
-                                removeTodolist={removeTodolist}
-                                changeTaskTitle={changeTaskTitle}
-                                changeTodolistTitle={changeTodolistTitle}
-                            /></Paper>
-                        </Grid>
-                    })
-                }
+                            return <Grid item key={tl.id}>
+                                <Paper elevation={3} style={{padding: '20px'}}><Todolist
+                                    id={tl.id}
+                                    title={tl.title}
+                                    tasks={tasksForTodolist}
+                                    removeTask={props.removeTask}
+                                    changeFilter={props.changeFilter}
+                                    addTask={props.addTask}
+                                    changeTaskStatus={props.changeStatus}
+                                    filter={tl.filter}
+                                    removeTodolist={props.removeTodolist}
+                                    changeTaskTitle={props.changeTaskTitle}
+                                    changeTodolistTitle={props.changeTodolistTitle}
+                                /></Paper>
+                            </Grid>
+                        })
+                    }
                 </Grid>
             </Container>
         </div>
