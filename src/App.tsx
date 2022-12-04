@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import {TaskType, Todolist} from './TodoList';
+import {Todolist} from './TodoList';
 import {v1} from 'uuid';
 import {AddItemForm} from './AddItemForm';
 import ButtonAppBar from './ButtonAppBar';
@@ -10,7 +10,7 @@ import Paper from '@mui/material/Paper';
 import {
     addTodolistAC,
     changeTodolistFilterAC,
-    changeTodolistTitleAC,
+    changeTodolistTitleAC, FilterValuesType,
     removeTodolistAC
 } from './reducers/todolistsReducer';
 import {
@@ -20,29 +20,9 @@ import {
     deleteTasksFromTodolistAC,
     removeTaskAC
 } from './reducers/tasksReducer';
-import {ActionsType} from './redux/store';
+import {AppType} from './AppContainer';
 
-export type FilterValuesType = "all" | "active" | "completed";
 
-export type TodolistType = {
-    id: string
-    title: string
-    filter: FilterValuesType
-}
-
-export type TasksStateType = {
-    [key: string]: Array<TaskType>
-}
-
-export type StateType ={
-    todolists: TodolistType[]
-    tasks: TasksStateType
-}
-
-type AppType = {
-    state: StateType
-    dispatch: (action:ActionsType)=>void
-}
 
 const App:React.FC<AppType> = ({state, dispatch}) => {
 

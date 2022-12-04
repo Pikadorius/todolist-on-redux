@@ -1,16 +1,21 @@
 import {combineReducers, legacy_createStore} from 'redux';
-import {TasksActionsType, tasksReducer} from '../reducers/tasksReducer';
-import {TodoActionsType, todolistsReducer} from '../reducers/todolistsReducer';
+import {tasksReducer} from '../reducers/tasksReducer';
+import {todolistsReducer} from '../reducers/todolistsReducer';
 
-// combine types of actions
-export type ActionsType = TasksActionsType | TodoActionsType
 
 // combine reducers with Redux method
-const reducers=combineReducers({
+const rootReducer=combineReducers({
     tasks: tasksReducer,
     todolists: todolistsReducer
 })
+export type AppRootState = ReturnType<typeof rootReducer>
+
+
 // create store with Redux method
-const store=legacy_createStore(reducers)
+const store=legacy_createStore(rootReducer)
+export type StoreType=typeof store;
+// @ts-ignore
+window.store = store;
 
 export default store;
+

@@ -1,21 +1,27 @@
-import {TasksStateType} from '../App';
 import {v1} from 'uuid';
 import {TaskType} from '../TodoList';
+import {todolistId1, todolistId2} from './todolistsReducer';
 
+
+export type TasksStateType = {
+    [key: string]: Array<TaskType>
+}
 
 // initial state for reducer
-const inititalState:TasksStateType = {
-    'firstToDo': [
+const inititalState = {
+    [todolistId1]: [
     {id: v1(), title: "HTML&CSS", isDone: true},
     {id: v1(), title: "JS", isDone: true}
-],
-    'secondToDo': [
+] as TaskType[],
+    [todolistId2]: [
     {id: v1(), title: "Milk", isDone: true},
     {id: v1(), title: "React Book", isDone: true}
-]
+] as TaskType[]
 }
+
+export type InititalStateType = typeof inititalState
 // if state comes - use it, esle - use initial state
-export const tasksReducer = (state: TasksStateType=inititalState, action: TasksActionsType) => {
+export const tasksReducer = (state: InititalStateType=inititalState, action: TasksActionsType):InititalStateType => {
     switch (action.type) {
         case 'ADD-TASK': {
             // create new task

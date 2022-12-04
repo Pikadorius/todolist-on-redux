@@ -1,12 +1,21 @@
-import {FilterValuesType, TodolistType} from '../App';
+import {v1} from 'uuid';
 
+export type FilterValuesType = "all" | "active" | "completed";
+
+export type TodolistType = {
+    id: string
+    title: string
+    filter: FilterValuesType
+}
+export let todolistId1=v1()
+export let todolistId2=v1()
 // initial state for reducer
 const initialState: TodolistType[] = [
-    {id: 'firstToDo', title: "What to learn", filter: "all"},
-    {id: 'secondToDo', title: "What to buy", filter: "all"}
+    {id: todolistId1, title: "What to learn", filter: "all"},
+    {id: todolistId2, title: "What to buy", filter: "all"}
 ]
 // if state comes - use it, esle - use initial state
-export const todolistsReducer = (state: TodolistType[]=initialState, action: TodoActionsType) => {
+export const todolistsReducer = (state: TodolistType[]=initialState, action: TodoActionsType):TodolistType[] => {
     switch (action.type) {
         case 'ADD-TODOLIST': {
             let newTodolist: TodolistType = {
@@ -35,7 +44,7 @@ export const todolistsReducer = (state: TodolistType[]=initialState, action: Tod
             } else return state;
         }
         default:
-            return state
+            return state;
     }
 }
 
