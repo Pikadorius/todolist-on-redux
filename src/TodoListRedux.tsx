@@ -30,8 +30,10 @@ type PropsType = {
 }
 
 export function TodolistRedux(props: PropsType) {
+    const selector = (state:AppRootState)=>state.tasks[props.id]
+    const tasks=useSelector(selector)
+    // const tasks=useSelector<AppRootState, TaskType[]>(state => state.tasks[props.id])  // another variant
 
-    const tasks=useSelector<AppRootState, TaskType[]>(state => state.tasks[props.id])
     let filteredTasks = tasks
 
     if (props.filter === "active") {
