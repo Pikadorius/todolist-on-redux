@@ -16,7 +16,6 @@ import {
 } from './reducers/todolistsReducer';
 import {AppRootState} from './redux/store';
 import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC, TasksStateType} from './reducers/tasksReducer';
-import {v1} from 'uuid';
 
 
 const App: React.FC = () => {
@@ -25,8 +24,8 @@ const App: React.FC = () => {
     const tasks = useSelector<AppRootState, TasksStateType>(state => state.tasks)
     const dispatch = useDispatch()
 
-    const addItem = (title: string) => {
-        dispatch(addTodolistAC(title, v1()))
+    const addTodolist = (title: string) => {
+        dispatch(addTodolistAC(title))
     }
 
     const removeTask = (taskId: string, todolistId: string) => {
@@ -61,7 +60,7 @@ const App: React.FC = () => {
             <ButtonAppBar/>
             <Container fixed>
                 <Grid container>
-                    <Paper style={{margin: '20px'}} elevation={3}><AddItemForm addItem={addItem}/></Paper>
+                    <Paper style={{margin: '20px'}} elevation={3}><AddItemForm addItem={addTodolist}/></Paper>
                     <button onClick={() => {
                         console.log(tasks)
                         console.log(todolists)

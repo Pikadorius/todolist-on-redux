@@ -56,12 +56,12 @@ export type TodoActionsType =
     | ChangeTodolistFilterACType
 
 export type AddTodolistACType = ReturnType<typeof addTodolistAC>
-export const addTodolistAC = (title: string, newTodolistId: string) => {
+export const addTodolistAC = (title: string) => {
     return {
         type: 'ADD-TODOLIST',
         payload: {
             title,
-            newTodolistId
+            newTodolistId: v1()
         }
     } as const
 }

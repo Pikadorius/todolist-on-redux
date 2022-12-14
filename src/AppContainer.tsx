@@ -45,8 +45,7 @@ const mapDispacthToProps = (dispatch: Dispatch): MapDispacthType => {
         changeStatus: (id: string, isDone: boolean, todolistId: string) => dispatch(changeTaskStatusAC(id, isDone, todolistId)),
         changeTaskTitle: (id: string, newTitle: string, todolistId: string) => dispatch(changeTaskTitleAC(id, newTitle, todolistId)),
         addTodolist: (title: string) => {
-            let newTodolistId = v1();
-            dispatch(addTodolistAC(title, newTodolistId))
+            dispatch(addTodolistAC(title))
         },
         removeTodolist: (id: string) => {
             dispatch(removeTodolistAC(id))
