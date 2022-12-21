@@ -1,7 +1,7 @@
-import React, {memo, useCallback, useEffect} from 'react';
-import './App.css';
-import {AddItemForm} from './AddItemForm';
-import ButtonAppBar from './ButtonAppBar';
+import React, {memo, useCallback, useEffect, useMemo} from 'react';
+import '../App.css';
+import {AddItemForm} from '../AddItemForm';
+import ButtonAppBar from '../ButtonAppBar';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
@@ -9,8 +9,8 @@ import {useDispatch, useSelector} from 'react-redux';
 import {
     addTodolistAC,
     TodolistType
-} from './reducers/todolistsReducer';
-import {AppRootState} from './redux/store';
+} from '../reducers/todolistsReducer';
+import {AppRootState} from './store';
 import {TodolistRedux} from './TodoListRedux';
 
 const App: React.FC = () => {
@@ -29,11 +29,7 @@ const App: React.FC = () => {
             <Container fixed>
                 <Grid container>
                     <Paper style={{margin: '20px'}} elevation={3}><AddItemForm addItem={addTodolist}/></Paper>
-                    {/*<button onClick={() => {
-                        // console.log(tasks)
-                        // console.log(todolists)
-                    }}>log
-                    </button>*/}
+
                 </Grid>
                 <Grid container spacing={3}>
                     {

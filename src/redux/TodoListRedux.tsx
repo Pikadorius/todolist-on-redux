@@ -1,6 +1,6 @@
 import React, {ChangeEvent, memo, useCallback} from 'react';
-import {AddItemForm} from './AddItemForm';
-import {EditableSpan} from './EditableSpan';
+import {AddItemForm} from '../AddItemForm';
+import {EditableSpan} from '../EditableSpan';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Checkbox from '@mui/material/Checkbox';
@@ -11,10 +11,11 @@ import {
     changeTodolistTitleAC,
     FilterValuesType,
     removeTodolistAC, TodolistType
-} from './reducers/todolistsReducer';
+} from '../reducers/todolistsReducer';
 import {useDispatch, useSelector} from 'react-redux';
-import {AppRootState} from './redux/store';
-import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC} from './reducers/tasksReducer';
+import {AppRootState} from './store';
+import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC} from '../reducers/tasksReducer';
+import TaskWithRedux from './TaskWithRedux';
 
 
 type PropsType = {
@@ -41,7 +42,7 @@ export const TodolistRedux = memo((props: PropsType) => {
 
     const addTask = useCallback((title: string) => {
         dispatch(addTaskAC(title, todoId))
-    },[])
+    },[todoId])
 
     const removeTodolist = () => {
         dispatch(removeTodolistAC(todoId))
@@ -62,25 +63,7 @@ export const TodolistRedux = memo((props: PropsType) => {
         <ul>
             {
                 filteredTasks.map(t => {
-
-                    const removeTask = () => dispatch(removeTaskAC(t.id, todoId))
-
-                    const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-                        let newIsDoneValue = e.currentTarget.checked;
-                        dispatch(changeTaskStatusAC(t.id, newIsDoneValue, todoId))
-                    }
-                    const onTitleChangeHandler = (newValue: string) => {
-                        dispatch(changeTaskTitleAC(t.id, newValue, todoId))
-                    }
-
-
-                    return <li key={t.id} className={t.isDone ? "is-done" : ""}>
-                        <Checkbox onChange={onChangeHandler} checked={t.isDone}/>
-                        <EditableSpan value={t.title} onChange={onTitleChangeHandler}/>
-                        <IconButton aria-label="delete" onClick={removeTask}>
-                            <DeleteIcon/>
-                        </IconButton>
-                    </li>
+                    return <TaskWithRedux key={t.id} task={t} todolistId={props.todolist.id}/>
                 })
             }
         </ul>
