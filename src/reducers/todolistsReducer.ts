@@ -10,10 +10,7 @@ export type TodolistType = {
 export let todolistId1=v1()
 export let todolistId2=v1()
 // initial state for reducer
-const initialState: TodolistType[] = [
-    {id: todolistId1, title: "What to learn", filter: "all"},
-    {id: todolistId2, title: "What to buy", filter: "all"}
-]
+const initialState = [] as TodolistType[]
 // if state comes - use it, esle - use initial state
 export const todolistsReducer = (state: TodolistType[]=initialState, action: TodoActionsType):TodolistType[] => {
     switch (action.type) {
@@ -29,19 +26,10 @@ export const todolistsReducer = (state: TodolistType[]=initialState, action: Tod
             return state.filter((t => t.id !== action.payload.id))
         }
         case 'CHANGE-TODOLIST-TITLE': {
-            const todolist = state.find(tl => tl.id === action.payload.todolistId);
-            if (todolist) {
-                // если нашёлся - изменим ему заголовок
-                todolist.title = action.payload.title;
-                return [...state]
-            } else return state;
+            return state.map(t=>t.id===action.payload.todolistId? {...t, title:action.payload.title}:t)
         }
         case 'CHANGE-TODOLIST-FILTER': {
-            let todolist = state.find(tl => tl.id === action.payload.id);
-            if (todolist) {
-                todolist.filter = action.payload.filter;
-                return [...state]
-            } else return state;
+            return state.map(t=>t.id===action.payload.id? {...t, filter:action.payload.filter}:t)
         }
         default:
             return state;

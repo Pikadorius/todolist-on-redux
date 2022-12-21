@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo, useCallback, useEffect} from 'react';
 import './App.css';
 import {AddItemForm} from './AddItemForm';
 import ButtonAppBar from './ButtonAppBar';
@@ -13,15 +13,15 @@ import {
 import {AppRootState} from './redux/store';
 import {TodolistRedux} from './TodoListRedux';
 
-
 const App: React.FC = () => {
+    console.log('AppWithRedux rendering...')
     // const tasks=useSelector<AppRootState, TasksStateType>(state => state.tasks)
     const todolists = useSelector<AppRootState, TodolistType[]>(state => state.todolists)
     const dispatch = useDispatch()
 
-    const addTodolist = (title: string) => {
+    const addTodolist = useCallback((title: string) => {
         dispatch(addTodolistAC(title))
-    }
+    },[dispatch])
 
     return (
         <div className="App">

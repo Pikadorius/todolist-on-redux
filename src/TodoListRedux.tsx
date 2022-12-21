@@ -1,4 +1,4 @@
-import React, {ChangeEvent} from 'react';
+import React, {ChangeEvent, memo, useCallback} from 'react';
 import {AddItemForm} from './AddItemForm';
 import {EditableSpan} from './EditableSpan';
 import IconButton from '@mui/material/IconButton';
@@ -21,7 +21,8 @@ type PropsType = {
     todolist: TodolistType
 }
 
-export function TodolistRedux(props: PropsType) {
+export const TodolistRedux = memo((props: PropsType) => {
+    console.log(`${props.todolist.id} rendering. ${props.todolist.filter}`)
     const {id: todoId, filter, title} = props.todolist
     // const tasks=useSelector<AppRootState, TaskType[]>(state => state.tasks[props.id])  // another variant
     const selector = (state: AppRootState) => state.tasks[todoId]
@@ -38,9 +39,9 @@ export function TodolistRedux(props: PropsType) {
     }
 
 
-    const addTask = (title: string) => {
+    const addTask = useCallback((title: string) => {
         dispatch(addTaskAC(title, todoId))
-    }
+    },[])
 
     const removeTodolist = () => {
         dispatch(removeTodolistAC(todoId))
@@ -63,6 +64,7 @@ export function TodolistRedux(props: PropsType) {
                 filteredTasks.map(t => {
 
                     const removeTask = () => dispatch(removeTaskAC(t.id, todoId))
+
                     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
                         let newIsDoneValue = e.currentTarget.checked;
                         dispatch(changeTaskStatusAC(t.id, newIsDoneValue, todoId))
@@ -98,6 +100,5 @@ export function TodolistRedux(props: PropsType) {
             </ButtonGroup>
         </div>
     </div>
-}
-
+})
 

@@ -8,16 +8,7 @@ export type TasksStateType = {
 }
 
 // initial state for reducer
-const inititalState = {
-    [todolistId1]: [
-    {id: v1(), title: "HTML&CSS", isDone: true},
-    {id: v1(), title: "JS", isDone: true}
-] as TaskType[],
-    [todolistId2]: [
-    {id: v1(), title: "Milk", isDone: true},
-    {id: v1(), title: "React Book", isDone: true}
-] as TaskType[]
-}
+const inititalState:TasksStateType = {}
 
 export type InititalStateType = typeof inititalState
 // if state comes - use it, esle - use initial state
@@ -26,44 +17,16 @@ export const tasksReducer = (state: InititalStateType=inititalState, action: Tas
         case 'ADD-TASK': {
             // create new task
             let task:TaskType = {id: v1(), title: action.payload.title, isDone: false};
-            // find rigth tasks
-            let todolistTasks = state[action.payload.todolistId];
-            // rewrite tasks with new task
-            state[action.payload.todolistId] = [task, ...todolistTasks];
-            // return changed tasks
-            return {...state}
+            return {...state, [action.payload.todolistId]:[task,...state[action.payload.todolistId]]}
         }
         case 'REMOVE-TASK': {
-            // find rigth tasks
-            let todolistTasks = state[action.payload.todolistId];
-            // rewrite it with filtered version
-            state[action.payload.todolistId] = todolistTasks.filter(t => t.id !== action.payload.id);
-            // return changed tasks
-            return {...state}
+            return {...state, [action.payload.todolistId]: state[action.payload.todolistId].filter(t => t.id !== action.payload.id)}
         }
         case 'CHANGE-TASK-STATUS': {
-            // find rigth tasks
-            let todolistTasks = state[action.payload.todolistId];
-            // find right task
-            let task = todolistTasks.find(t => t.id === action.payload.id);
-            // change task if you can find it
-            if (task) {
-                task.isDone = action.payload.isDone;
-                // return changed task
-                return {...state}
-            } else return state;
+            return {...state, [action.payload.todolistId]: state[action.payload.todolistId].map(t=>t.id===action.payload.id? {...t, isDone: action.payload.isDone}:t)}
         }
         case 'CHANGE-TASK-TITLE': {
-            // find rigth tasks
-            let todolistTasks = state[action.payload.todolistId];
-            // find right task
-            let task = todolistTasks.find(t => t.id === action.payload.id);
-            // change task if you can find it
-            if (task) {
-                task.title = action.payload.newTitle;
-                // return changed task
-                return {...state}
-            } else return state;
+            return {...state, [action.payload.todolistId]: state[action.payload.todolistId].map(t=>t.id===action.payload.id? {...t, title: action.payload.newTitle}:t)}
         }
         case 'ADD-TODOLIST': {
             return {[action.payload.newTodolistId]: [], ...state}
