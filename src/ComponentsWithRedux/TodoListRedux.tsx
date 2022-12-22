@@ -13,7 +13,7 @@ import {
     removeTodolistAC, TodolistType
 } from '../reducers/todolistsReducer';
 import {useDispatch, useSelector} from 'react-redux';
-import {AppRootState} from './store';
+import {AppRootState} from '../redux/store';
 import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC} from '../reducers/tasksReducer';
 import TaskWithRedux from './TaskWithRedux';
 

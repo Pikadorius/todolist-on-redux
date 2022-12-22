@@ -3,7 +3,7 @@ import './index.css';
 import {createRoot} from 'react-dom/client';
 import store from './redux/store';
 import {Provider} from 'react-redux';
-import AppRedux from './redux/AppRedux';
+import AppRedux from './ComponentsWithRedux/AppRedux';
 import App from './App';
 
 const container = document.getElementById('root') as HTMLElement

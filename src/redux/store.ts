@@ -13,7 +13,6 @@ export type AppRootState = ReturnType<typeof rootReducer>
 
 // create store with Redux method
 const store=legacy_createStore(rootReducer)
-export type StoreType=typeof store;
 // @ts-ignore
 window.store = store;
 

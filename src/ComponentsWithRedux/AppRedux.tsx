@@ -10,7 +10,7 @@ import {
     addTodolistAC,
     TodolistType
 } from '../reducers/todolistsReducer';
-import {AppRootState} from './store';
+import {AppRootState} from '../redux/store';
 import {TodolistRedux} from './TodoListRedux';
 
 const App: React.FC = () => {

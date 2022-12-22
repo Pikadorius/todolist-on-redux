@@ -1,4 +1,4 @@
-import React, {ChangeEvent, memo} from 'react';
+import React, {ChangeEvent, memo, useCallback} from 'react';
 import {TaskType} from './TodoList';
 import Checkbox from '@mui/material/Checkbox';
 import {EditableSpan} from './EditableSpan';
@@ -21,9 +21,9 @@ const Task = memo((props: TaskPropsType) => {
         let newIsDoneValue = e.currentTarget.checked;
         props.changeTaskStatus(props.task.id, newIsDoneValue);
     }
-    const onTitleChangeHandler = (newValue: string) => {
+    const onTitleChangeHandler = useCallback((newValue: string) => {
         props.changeTaskTitle(props.task.id, newValue);
-    }
+    },[props.changeTaskTitle, props.task.id])
 
     return (
     <li className={props.task.isDone ? "is-done" : ""}>

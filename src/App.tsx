@@ -1,4 +1,4 @@
-import React, {useCallback} from 'react';
+import React, {memo, useCallback} from 'react';
 import './App.css';
 import {Todolist} from './TodoList';
 import {AddItemForm} from './AddItemForm';
@@ -18,10 +18,20 @@ import {
 import {AppRootState} from './redux/store';
 import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC, TasksStateType} from './reducers/tasksReducer';
 
+/*const Fake = memo(() =>{
+    console.log('Fake rendering')
+    const todo=useSelector<AppRootState, TodolistType[]>(state=>state.todolists)
+    return (
+        <div>
+            {todo.map((t,i)=><div key={i}>{t.title}</div>)}
+        </div>
+    )
+})*/
 
 const App: React.FC = () => {
     console.log(`App rendering`)
 
+    // так как доступ к таскам и тудулистам в App - апп рендерится при любом изменении
     const todolists = useSelector<AppRootState, TodolistType[]>(state => state.todolists)
     const tasks = useSelector<AppRootState, TasksStateType>(state => state.tasks)
     const dispatch = useDispatch()
@@ -32,33 +42,34 @@ const App: React.FC = () => {
 
     const removeTask = useCallback((taskId: string, todolistId: string) => {
         dispatch(removeTaskAC(taskId, todolistId))
-    },[])
+    },[dispatch])
 
     const changeFilter = useCallback((value: FilterValuesType, todolistId: string) => {
         dispatch(changeTodolistFilterAC(value, todolistId))
-    },[])
+    },[dispatch])
 
     const addTask = useCallback((title: string, todolistId: string) => {
         dispatch(addTaskAC(title, todolistId))
-    },[])
+    },[dispatch])
     const changeTaskStatus = useCallback((id: string, isDone: boolean, todolistId: string) => {
         dispatch(changeTaskStatusAC(id, isDone, todolistId))
-    },[])
+    },[dispatch])
     const removeTodolist =useCallback((id: string) => {
         dispatch(removeTodolistAC(id))
-    },[])
+    },[dispatch])
 
     const changeTaskTitle = useCallback((taskId: string, newTitle: string, todolistId: string) => {
         dispatch(changeTaskTitleAC(taskId, newTitle, todolistId))
-    },[])
+    },[dispatch])
 
     const changeTodolistTitle = useCallback((todolistId: string, newTitle: string) => {
         dispatch(changeTodolistTitleAC(todolistId, newTitle))
-    },[])
+    },[dispatch])
 
 
     return (
         <div className="App">
+            {/*<Fake/>*/}
             <ButtonAppBar/>
             <Container fixed>
                 <Grid container>

@@ -40,9 +40,9 @@ export const Todolist = memo(function (props: PropsType) {
     const removeTodolist = () => {
         props.removeTodolist(props.id);
     }
-    const changeTodolistTitle = (title: string) => {
+    const changeTodolistTitle = useCallback((title: string) => {
         props.changeTodolistTitle(props.id, title);
-    }
+    },[props.id, props.changeTodolistTitle])
 
     let taskForTodolist = (): TaskType[] => {
         if (props.filter === "active") {
@@ -52,7 +52,10 @@ export const Todolist = memo(function (props: PropsType) {
         } else return props.tasks
     }
 
-    const filterHandler = (filter: FilterValuesType) => () => props.changeFilter(filter, props.id)
+    // const filterHandler = (filter: FilterValuesType) => () => props.changeFilter(filter, props.id)
+    const allHandler = useCallback(() => props.changeFilter('all', props.id),[props.id, props.changeFilter])
+    const activeHandler = useCallback(() => props.changeFilter('active', props.id),[props.id, props.changeFilter])
+    const completedHandler = useCallback(() => props.changeFilter('completed', props.id),[props.id, props.changeFilter])
 
     const removeTask = useCallback((taskId: string) => props.removeTask(taskId, props.id), [props.removeTask, props.id])
     const changeTaskStatus = useCallback((taskId: string, newIsDoneValue: boolean) => {
@@ -84,14 +87,19 @@ export const Todolist = memo(function (props: PropsType) {
         <div>
             <ButtonGroup>
                 <Button size='small' variant={props.filter === 'all' ? "contained" : 'outlined'} color="warning"
-                        onClick={filterHandler('all')}>All</Button>
+                        onClick={allHandler}>All</Button>
 
                 <Button size='small' variant={props.filter === 'active' ? "contained" : 'outlined'} color="error"
-                        onClick={filterHandler('active')}>Active</Button>
+                        onClick={activeHandler}>Active</Button>
 
                 <Button size='small' variant={props.filter === 'completed' ? "contained" : 'outlined'} color='success'
-                        onClick={filterHandler('completed')}>Completed</Button>
-                <ButtonMemo onClick={filterHandler('completed')} title={'Completed'} color={'success'} variant={props.filter === 'completed' ? "contained" : 'outlined'}/>
+                        onClick={completedHandler}>Completed</Button>
+{/*
+                <ButtonMemo onClick={allHandler} title={'All'} color={'warning'} variant={props.filter === 'all' ? "contained" : 'outlined'}/>
+
+                <ButtonMemo onClick={activeHandler} title={'Active'} color={'error'} variant={props.filter === 'active' ? "contained" : 'outlined'}/>
+
+                <ButtonMemo onClick={completedHandler} title={'Completed'} color={'success'} variant={props.filter === 'completed' ? "contained" : 'outlined'}/>*/}
             </ButtonGroup>
         </div>
     </div>
