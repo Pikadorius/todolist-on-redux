@@ -32,7 +32,7 @@ export const AddItemForm = memo((props: AddItemFormPropsType) => {
     }
 
     return <div>
-        <TextField label={error ? "Write something..." : "Enter task:"} variant="outlined" value={title}
+        <TextField label={error ? "Write something..." : "Enter new item:"} variant="outlined" value={title}
                    onChange={onChangeHandler}
                    onKeyPress={onKeyPressHandler}
                    className={error ? "error" : "Enter task:"}

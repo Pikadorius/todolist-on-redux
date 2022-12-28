@@ -8,7 +8,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 type TaskPropsType = {
     task: TaskType
     removeTask: (taskId: string) => void
-    changeTaskStatus: (id: string, isDone: boolean) => void
+    changeTaskStatus: (taskId: string, isDone: boolean) => void
     changeTaskTitle: (taskId: string, newTitle: string) => void
 }
 
