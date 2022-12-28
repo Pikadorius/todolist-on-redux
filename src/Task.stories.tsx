@@ -4,6 +4,9 @@ import {action} from '@storybook/addon-actions';
 import {useState} from 'react';
 import React from 'react';
 import {ComponentMeta, ComponentStory} from '@storybook/react';
+import TaskWithRedux from './ComponentsWithRedux/TaskWithRedux';
+import {ReduxStoreProviderDecorator} from './redux/ReduxStoreProviderDecorator';
+import {v1} from 'uuid';
 
 export default {
     title: 'Todolist/Task',
@@ -17,7 +20,8 @@ export default {
         changeTaskTitle: action('Title changed'),
         removeTask: action('Task deleted'),
         changeTaskStatus: action('Status changed')
-    }
+    },
+    decorators: [ReduxStoreProviderDecorator]
 } as ComponentMeta<typeof Task>
 
 
@@ -57,8 +61,6 @@ const Template1: ComponentStory<typeof Task> = (args) => {
 }
 
 export const ControlledTask = Template1.bind({})
-
-
 
 
 
