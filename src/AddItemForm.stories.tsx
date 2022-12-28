@@ -1,13 +1,29 @@
 import React, {useState} from 'react';
 import {AddItemForm} from './AddItemForm';
-import {action, actions} from '@storybook/addon-actions';
+import {action} from '@storybook/addon-actions';
+import {ComponentMeta, ComponentStory} from '@storybook/react';
 
 export default {
-    title: 'Components/AddItemForm',
-    component: AddItemForm
+    title: 'Todolist/AddItemForm',
+    component: AddItemForm,
+    argTypes: {
+        addItem: {
+            descripton: 'Button clicked'
+        }
+    }
+} as ComponentMeta<typeof AddItemForm>;
+
+
+const Template: ComponentStory<typeof AddItemForm> = (args) => <AddItemForm {...args} />;
+
+
+
+export  const AddItemFormStory = Template.bind({})
+AddItemFormStory.args = {
+    addItem: action('Button "+" clicked')
 }
 
-
+/*
 export const AddItemFormBaseExample = () => {
     const [state, setState] = useState<string[]>([])
 
@@ -20,9 +36,4 @@ export const AddItemFormBaseExample = () => {
         {state.map((item, i) => <div key={i}>{item}</div>)}
     </>
 }
-
-export const AddItemFormBaseExampleWithActions= () => {
-
-    return <AddItemForm addItem={action('Item was added')}/>
-
-}
+*/

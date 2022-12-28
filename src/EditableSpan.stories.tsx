@@ -4,7 +4,7 @@ import {useState} from 'react';
 import React from 'react';
 
 export default {
-    title: 'Components/EditableSpan',
+    title: 'Todolist/EditableSpan',
     component: EditableSpan
 }
 
