@@ -1,34 +1,34 @@
 import React, {useEffect, useState} from 'react'
-import {todolistsAPI, TodolistType} from '../API/API';
+import {tasksAPI, todolistsAPI} from '../API/API';
 
 export default {
-    title: 'API/Todolist'
+    title: 'API/Tasks'
 }
 
-export const GetTodolists = () => {
+export const GetTasks = () => {
     const [state, setState] = useState<any>(null)
     useEffect(() => {
         // здесь мы будем делать запрос и ответ закидывать в стейт.
         // который в виде строки будем отображать в div-ке
-        todolistsAPI.getAllTodolists().then(data => setState(data))
+        tasksAPI.getTasks("837ae73f-d715-4368-9e8b-f3c4405e6581").then(res => setState(res.data.items))
     }, [])
     return <div>{JSON.stringify(state)}</div>
 }
 
 
-export const CreateTodolist = () => {
+export const CreateTask = () => {
     const [state, setState] = useState<any>(null)
 
     const [value, setValue] = useState('')
 
 
     const onClickHandler = () => {
-        todolistsAPI.createTodolist(value.trim())
+        tasksAPI.createTask("837ae73f-d715-4368-9e8b-f3c4405e6581", value.trim())
         setValue('')
     }
 
     useEffect(() => {
-        todolistsAPI.getAllTodolists().then(data => setState(data))
+        tasksAPI.getTasks("837ae73f-d715-4368-9e8b-f3c4405e6581").then(res => setState(res.data.items))
     }, [value])
 
 
@@ -42,13 +42,13 @@ export const CreateTodolist = () => {
 }
 
 
-export const DeleteTodolist = () => {
+export const DeleteTask = () => {
     const [state, setState] = useState<any>(null)
     const [value, setValue] = useState('')
 
 
     const onClickHandler = () => {
-        todolistsAPI.deleteTodolist(value.trim()).then(()=>setState('Todolist deleted')).catch(()=>setState('No such todolist'))
+        todolistsAPI.deleteTodolist(value.trim()).then(() => setState('Todolist deleted')).catch(() => setState('No such todolist'))
         setValue('')
     }
 
@@ -63,7 +63,16 @@ export const DeleteTodolist = () => {
 }
 
 
-export const UpdateTodolistTitle = () => {
+export const UpdateTaskTitle = () => {
+    const [state, setState] = useState<any>(null)
+    useEffect(() => {
+        todolistsAPI.updateTodolistTitle("386123b3-1569-4932-acec-b51a303696b8", 'renamed todo 2')
+    }, [])
+
+    return <div>{JSON.stringify(state)}</div>
+}
+
+export const UpdateTaskStatus = () => {
     const [state, setState] = useState<any>(null)
     useEffect(() => {
         todolistsAPI.updateTodolistTitle("386123b3-1569-4932-acec-b51a303696b8", 'renamed todo 2')
