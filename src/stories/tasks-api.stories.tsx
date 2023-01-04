@@ -48,7 +48,7 @@ export const DeleteTask = () => {
 
 
     const onClickHandler = () => {
-        todolistsAPI.deleteTodolist(value.trim()).then(() => setState('Todolist deleted')).catch(() => setState('No such todolist'))
+        tasksAPI.deleteTask("837ae73f-d715-4368-9e8b-f3c4405e6581", value.trim()).then(() => setState('Task deleted')).catch(() => setState('No such task'))
         setValue('')
     }
 
@@ -66,7 +66,7 @@ export const DeleteTask = () => {
 export const UpdateTaskTitle = () => {
     const [state, setState] = useState<any>(null)
     useEffect(() => {
-        todolistsAPI.updateTodolistTitle("386123b3-1569-4932-acec-b51a303696b8", 'renamed todo 2')
+
     }, [])
 
     return <div>{JSON.stringify(state)}</div>
@@ -75,7 +75,7 @@ export const UpdateTaskTitle = () => {
 export const UpdateTaskStatus = () => {
     const [state, setState] = useState<any>(null)
     useEffect(() => {
-        todolistsAPI.updateTodolistTitle("386123b3-1569-4932-acec-b51a303696b8", 'renamed todo 2')
+
     }, [])
 
     return <div>{JSON.stringify(state)}</div>
