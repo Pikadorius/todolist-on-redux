@@ -27,6 +27,6 @@ export const tasksAPI = {
 }
 
 export const authAPI = {
-    me: () => axiosInstanse.get('/auth/me')
-
+    me: () => axiosInstanse.get('/auth/me').then(response=>response.data),
+    authorize: ()=>axiosInstanse.post(`/auth/login`)
 }

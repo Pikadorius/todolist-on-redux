@@ -1,6 +1,7 @@
 import {combineReducers, legacy_createStore} from 'redux';
 import {tasksReducer} from '../reducers/tasksReducer';
 import {todolistsReducer} from '../reducers/todolistsReducer';
+import {authReducer} from '../reducers/authReducer';
 
 
 // combine reducers with Redux method

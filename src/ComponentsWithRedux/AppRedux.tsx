@@ -19,9 +19,10 @@ const App: React.FC = () => {
     const todolists = useSelector<AppRootState, TodolistType[]>(state => state.todolists)
     const dispatch = useDispatch()
 
+
     const addTodolist = useCallback((title: string) => {
         dispatch(addTodolistAC(title))
-    },[dispatch])
+    }, [dispatch])
 
     return (
         <div className="App">
