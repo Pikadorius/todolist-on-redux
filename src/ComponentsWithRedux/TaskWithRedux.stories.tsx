@@ -2,7 +2,7 @@ import {ComponentMeta, ComponentStory} from '@storybook/react';
 import TaskWithRedux from './TaskWithRedux';
 import React from 'react';
 import {ReduxStoreProviderDecorator} from '../redux/ReduxStoreProviderDecorator';
-import {useDispatch, useSelector} from 'react-redux';
+import {useSelector} from 'react-redux';
 import {AppRootState} from '../redux/store';
 import {TaskType} from '../TodoList';
 
