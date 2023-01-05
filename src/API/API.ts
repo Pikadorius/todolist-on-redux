@@ -9,6 +9,7 @@ export type TodolistType = {
 
 type ResponseType<D={}> = {
     data: D
+    fieldsErrors: string[]
     resultCode: number
     messages: string[]
 }

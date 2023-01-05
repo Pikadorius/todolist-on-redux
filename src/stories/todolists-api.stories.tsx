@@ -18,12 +18,10 @@ export const GetTodolists = () => {
 
 export const CreateTodolist = () => {
     const [state, setState] = useState<any>(null)
-
     const [value, setValue] = useState('')
 
-
     const onClickHandler = () => {
-        todolistsAPI.createTodolist(value.trim())
+        todolistsAPI.createTodolist(value.trim()).then(res=>console.log(res))
         setValue('')
     }
 
@@ -66,7 +64,7 @@ export const DeleteTodolist = () => {
 export const UpdateTodolistTitle = () => {
     const [state, setState] = useState<any>(null)
     useEffect(() => {
-        todolistsAPI.updateTodolistTitle("a1db1af1-e811-4586-8a9e-900203ab0171", 'What to learn')
+        todolistsAPI.updateTodolistTitle("a1db1af1-e811-4586-8a9e-900203ab0171", 'What to learn').then(res=>setState(res.data))
     }, [])
 
     return <div>{JSON.stringify(state)}</div>
