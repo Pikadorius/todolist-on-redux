@@ -8,7 +8,7 @@ import Paper from '@mui/material/Paper';
 import {useDispatch, useSelector} from 'react-redux';
 import {
     addTodolistAC,
-    TodolistType
+    TodolistDomainType
 } from '../reducers/todolistsReducer';
 import {AppRootState} from '../redux/store';
 import {TodolistRedux} from './TodoListRedux';
@@ -16,7 +16,7 @@ import {TodolistRedux} from './TodoListRedux';
 const App: React.FC = () => {
     console.log('AppWithRedux rendering...')
     // const tasks=useSelector<AppRootState, TasksStateType>(state => state.tasks)
-    const todolists = useSelector<AppRootState, TodolistType[]>(state => state.todolists)
+    const todolists = useSelector<AppRootState, TodolistDomainType[]>(state => state.todolists)
     const dispatch = useDispatch()
 
 

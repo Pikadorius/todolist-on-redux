@@ -14,11 +14,11 @@ import {
     changeTodolistFilterAC,
     changeTodolistTitleAC,
     FilterValuesType,
-    removeTodolistAC, TodolistType
+    removeTodolistAC, TodolistDomainType
 } from './reducers/todolistsReducer';
 
 type MapStateType = {
-    todolists: TodolistType[]
+    todolists: TodolistDomainType[]
     tasks: InititalStateType
 }
 const mapStateToProps = (state: AppRootState): MapStateType => {

@@ -10,7 +10,7 @@ import {
     changeTodolistFilterAC,
     changeTodolistTitleAC,
     FilterValuesType,
-    removeTodolistAC, TodolistType
+    removeTodolistAC, TodolistDomainType
 } from '../reducers/todolistsReducer';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppRootState} from '../redux/store';
@@ -19,7 +19,7 @@ import TaskWithRedux from './TaskWithRedux';
 
 
 type PropsType = {
-    todolist: TodolistType
+    todolist: TodolistDomainType
 }
 
 export const TodolistRedux = memo((props: PropsType) => {

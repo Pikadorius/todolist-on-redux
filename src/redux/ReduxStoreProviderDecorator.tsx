@@ -1,10 +1,10 @@
 import React from 'react'
-import { Provider } from 'react-redux'
+import {Provider} from 'react-redux'
 import {combineReducers, legacy_createStore} from 'redux'
-import { v1 } from 'uuid'
+import {v1} from 'uuid'
 import {tasksReducer} from '../reducers/tasksReducer';
-import {todolistsReducer} from '../reducers/todolistsReducer';
-import  {AppRootState} from './store';
+import {TodolistDomainType, todolistsReducer} from '../reducers/todolistsReducer';
+import {AppRootState} from './store';
 
 
 const rootReducer = combineReducers({
@@ -14,9 +14,9 @@ const rootReducer = combineReducers({
 
 const initialGlobalState = {
     todolists: [
-        {id: 'todolistId1', title: 'What to learn', filter: 'all'},
-        {id: 'todolistId2', title: 'What to buy', filter: 'all'}
-    ],
+        {id: 'todolistId1', title: 'What to learn', filter: 'all', order: 0, addedDate: '1'},
+        {id: 'todolistId2', title: 'What to buy', filter: 'all', order: 1, addedDate: '2'}
+    ] as TodolistDomainType[],
     tasks: {
         ['todolistId1']: [
             {id: v1(), title: 'HTML&CSS', isDone: true},
@@ -31,7 +31,7 @@ const initialGlobalState = {
 
 export const storyBookStore = legacy_createStore(rootReducer, initialGlobalState as AppRootState)
 
-export const ReduxStoreProviderDecorator = (storyFn: ()=>JSX.Element)=>{
+export const ReduxStoreProviderDecorator = (storyFn: () => JSX.Element) => {
     return <Provider store={storyBookStore}>
         {storyFn()}
     </Provider>

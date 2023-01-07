@@ -13,7 +13,7 @@ import {
     changeTodolistTitleAC,
     FilterValuesType,
     removeTodolistAC,
-    TodolistType
+    TodolistDomainType
 } from './reducers/todolistsReducer';
 import {AppRootState} from './redux/store';
 import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC, TasksStateType} from './reducers/tasksReducer';
@@ -32,7 +32,7 @@ const App: React.FC = () => {
     console.log(`App rendering`)
 
     // так как доступ к таскам и тудулистам в App - апп рендерится при любом изменении
-    const todolists = useSelector<AppRootState, TodolistType[]>(state => state.todolists)
+    const todolists = useSelector<AppRootState, TodolistDomainType[]>(state => state.todolists)
     const tasks = useSelector<AppRootState, TasksStateType>(state => state.tasks)
     const dispatch = useDispatch()
 
