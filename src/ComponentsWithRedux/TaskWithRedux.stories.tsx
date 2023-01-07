@@ -4,7 +4,7 @@ import React from 'react';
 import {ReduxStoreProviderDecorator} from '../redux/ReduxStoreProviderDecorator';
 import {useSelector} from 'react-redux';
 import {AppRootState} from '../redux/store';
-import {TaskType} from '../TodoList';
+import {TaskType} from '../API/API';
 
 export default {
     title: 'Todolist/TaskWithRedux',
@@ -19,7 +19,7 @@ const TaskWithReduxContainer = () => {
     return <TaskWithRedux task={task} todolistId={'todolistId1'}/>
 }
 
-const Template: ComponentStory<typeof TaskWithRedux> = (args) => {
+const Template: ComponentStory<typeof TaskWithRedux> = () => {
     return <TaskWithReduxContainer/>
 }
 

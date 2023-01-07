@@ -2,7 +2,7 @@ import React from 'react'
 import {Provider} from 'react-redux'
 import {combineReducers, legacy_createStore} from 'redux'
 import {v1} from 'uuid'
-import {tasksReducer} from '../reducers/tasksReducer';
+import {defaultTask, tasksReducer, TasksStateType} from '../reducers/tasksReducer';
 import {TodolistDomainType, todolistsReducer} from '../reducers/todolistsReducer';
 import {AppRootState} from './store';
 
@@ -19,14 +19,14 @@ const initialGlobalState = {
     ] as TodolistDomainType[],
     tasks: {
         ['todolistId1']: [
-            {id: v1(), title: 'HTML&CSS', isDone: true},
-            {id: v1(), title: 'JS', isDone: false}
+            {...defaultTask, id: v1(), title: 'HTML&CSS', todoListId: 'todolistId1'},
+            {...defaultTask, id: v1(), title: 'JS', todoListId: 'todolistId1'}
         ],
         ['todolistId2']: [
-            {id: v1(), title: 'Milk', isDone: false},
-            {id: v1(), title: 'React Book', isDone: true}
+            {...defaultTask, id: v1(), title: 'Milk', todoListId: 'todolistId2'},
+            {...defaultTask, id: v1(), title: 'React Book', todoListId: 'todolistId2'}
         ]
-    }
+    } as TasksStateType
 }
 
 export const storyBookStore = legacy_createStore(rootReducer, initialGlobalState as AppRootState)

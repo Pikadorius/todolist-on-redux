@@ -1,4 +1,4 @@
-import React, {memo, useCallback} from 'react';
+import React, { useCallback} from 'react';
 import './App.css';
 import {Todolist} from './TodoList';
 import {AddItemForm} from './AddItemForm';
@@ -18,15 +18,6 @@ import {
 import {AppRootState} from './redux/store';
 import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC, TasksStateType} from './reducers/tasksReducer';
 
-/*const Fake = memo(() =>{
-    console.log('Fake rendering')
-    const todo=useSelector<AppRootState, TodolistType[]>(state=>state.todolists)
-    return (
-        <div>
-            {todo.map((t,i)=><div key={i}>{t.title}</div>)}
-        </div>
-    )
-})*/
 
 const App: React.FC = () => {
     console.log(`App rendering`)
@@ -51,8 +42,8 @@ const App: React.FC = () => {
     const addTask = useCallback((title: string, todolistId: string) => {
         dispatch(addTaskAC(title, todolistId))
     },[dispatch])
-    const changeTaskStatus = useCallback((id: string, isDone: boolean, todolistId: string) => {
-        dispatch(changeTaskStatusAC(id, isDone, todolistId))
+    const changeTaskStatus = useCallback((id: string, status: number, todolistId: string) => {
+        dispatch(changeTaskStatusAC(id, status, todolistId))
     },[dispatch])
     const removeTodolist =useCallback((id: string) => {
         dispatch(removeTodolistAC(id))

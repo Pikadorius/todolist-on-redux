@@ -1,21 +1,20 @@
 import Task from './Task';
-import {TaskType} from './TodoList';
 import {action} from '@storybook/addon-actions';
-import {useState} from 'react';
-import React from 'react';
+import React, {useState} from 'react';
 import {ComponentMeta, ComponentStory} from '@storybook/react';
-import TaskWithRedux from './ComponentsWithRedux/TaskWithRedux';
 import {ReduxStoreProviderDecorator} from './redux/ReduxStoreProviderDecorator';
-import {v1} from 'uuid';
+import {defaultTask} from './reducers/tasksReducer';
+import {TaskStatuses, TaskType} from './API/API';
 
 export default {
     title: 'Todolist/Task',
     component: Task,
     args: {
         task: {
+            ...defaultTask,
             id: '1',
             title: 'Test storybook',
-            isDone: true
+            status:TaskStatuses.Completed
         },
         changeTaskTitle: action('Title changed'),
         removeTask: action('Task deleted'),
@@ -33,25 +32,25 @@ export const TaskIsDoneStory = Template.bind({})
 export const TaskIsUndoneStory = Template.bind({})
 TaskIsUndoneStory.args = {
     task: {
+        ...defaultTask,
         id: '1',
-        title: 'Test storybook',
-        isDone: false
+        title: 'Test storybook'
     }
 }
 //===================Controlled============================
 
-const Template1: ComponentStory<typeof Task> = (args) => {
+const Template1: ComponentStory<typeof Task> = () => {
     const [task, setTask] = useState<TaskType>({
+        ...defaultTask,
         id: '1',
         title: 'Test storybook',
-        isDone: false
     })
 
     const changeTitle = (id: string, title: string) => {
         setTask({...task, title})
     }
-    const changeStatus = (id: string, isDone: boolean) => {
-        setTask({...task, isDone})
+    const changeStatus = (id: string, status: number) => {
+        setTask({...task, status})
     }
     return <Task
         task={task}

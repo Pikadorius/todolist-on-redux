@@ -5,10 +5,9 @@ import {AppRootState} from './redux/store';
 import {
     addTaskAC,
     changeTaskStatusAC,
-    changeTaskTitleAC, InititalStateType,
-    removeTaskAC
+    changeTaskTitleAC,
+    removeTaskAC, TasksStateType
 } from './reducers/tasksReducer';
-import {v1} from 'uuid';
 import {
     addTodolistAC,
     changeTodolistFilterAC,
@@ -19,7 +18,7 @@ import {
 
 type MapStateType = {
     todolists: TodolistDomainType[]
-    tasks: InititalStateType
+    tasks: TasksStateType
 }
 const mapStateToProps = (state: AppRootState): MapStateType => {
     return {
@@ -31,7 +30,7 @@ const mapStateToProps = (state: AppRootState): MapStateType => {
 type MapDispacthType = {
     removeTask: (id: string, todolistId: string) => void
     addTask: (title: string, todolistId: string) => void
-    changeStatus: (id: string, isDone: boolean, todolistId: string) => void
+    changeStatus: (id: string, status: number, todolistId: string) => void
     changeTaskTitle: (id: string, newTitle: string, todolistId: string) => void
     addTodolist: (title: string) => void
     removeTodolist: (id: string) => void
@@ -42,7 +41,7 @@ const mapDispacthToProps = (dispatch: Dispatch): MapDispacthType => {
     return {
         removeTask: (id: string, todolistId: string) => dispatch(removeTaskAC(id, todolistId)),
         addTask: (title: string, todolistId: string) => dispatch(addTaskAC(title, todolistId)),
-        changeStatus: (id: string, isDone: boolean, todolistId: string) => dispatch(changeTaskStatusAC(id, isDone, todolistId)),
+        changeStatus: (id: string, status: number, todolistId: string) => dispatch(changeTaskStatusAC(id, status, todolistId)),
         changeTaskTitle: (id: string, newTitle: string, todolistId: string) => dispatch(changeTaskTitleAC(id, newTitle, todolistId)),
         addTodolist: (title: string) => {
             dispatch(addTodolistAC(title))
