@@ -1,4 +1,4 @@
-import React, {memo, useCallback} from 'react';
+import React, {memo, useCallback, useEffect} from 'react';
 import {AddItemForm} from '../AddItemForm';
 import {EditableSpan} from '../EditableSpan';
 import IconButton from '@mui/material/IconButton';
@@ -7,14 +7,13 @@ import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import {
     changeTodolistFilterAC,
-    changeTodolistTitleAC,
+    changeTodolistTitleAC, deleteTodolistTC,
     FilterValuesType,
-    removeTodolistAC,
     TodolistDomainType
 } from '../reducers/todolistsReducer';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppRootState} from '../redux/store';
-import {addTaskAC} from '../reducers/tasksReducer';
+import {addTaskTC, fetchTasksForTodolist} from '../reducers/tasksReducer';
 import TaskWithRedux from './TaskWithRedux';
 import {TaskStatuses} from '../API/API';
 
@@ -29,24 +28,29 @@ export const TodolistRedux = memo((props: PropsType) => {
     // const tasks=useSelector<AppRootState, TaskType[]>(state => state.tasks[props.id])  // another variant
     const selector = (state: AppRootState) => state.tasks[todoId]
     const tasks = useSelector(selector)
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<any>()
+
+    useEffect(() => {
+        dispatch(fetchTasksForTodolist(props.todolist.id))
+    }, [])
+
 
     let filteredTasks = tasks
 
     if (filter === "active") {
-        filteredTasks = tasks.filter(t => t.status===TaskStatuses.New);
+        filteredTasks = tasks.filter(t => t.status === TaskStatuses.New);
     }
     if (filter === "completed") {
-        filteredTasks = tasks.filter(t => t.status===TaskStatuses.Completed);
+        filteredTasks = tasks.filter(t => t.status === TaskStatuses.Completed);
     }
 
 
     const addTask = useCallback((title: string) => {
-        dispatch(addTaskAC(title, todoId))
-    },[todoId])
+        dispatch(addTaskTC(todoId, title))
+    }, [todoId])
 
     const removeTodolist = () => {
-        dispatch(removeTodolistAC(todoId))
+        dispatch(deleteTodolistTC(todoId))
     }
     const changeTodolistTitle = (title: string) => {
         dispatch(changeTodolistTitleAC(todoId, title))

@@ -8,7 +8,7 @@ import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import {useDispatch, useSelector} from 'react-redux';
 import {
-    addTodolistAC,
+     addTodolistTC,
     changeTodolistFilterAC,
     changeTodolistTitleAC,
     FilterValuesType,
@@ -16,7 +16,13 @@ import {
     TodolistDomainType
 } from './reducers/todolistsReducer';
 import {AppRootState} from './redux/store';
-import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC, TasksStateType} from './reducers/tasksReducer';
+import {
+    addTaskTC,
+    changeTaskStatusAC,
+    changeTaskTitleAC,
+    removeTaskAC,
+    TasksStateType
+} from './reducers/tasksReducer';
 
 
 const App: React.FC = () => {
@@ -25,10 +31,10 @@ const App: React.FC = () => {
     // так как доступ к таскам и тудулистам в App - апп рендерится при любом изменении
     const todolists = useSelector<AppRootState, TodolistDomainType[]>(state => state.todolists)
     const tasks = useSelector<AppRootState, TasksStateType>(state => state.tasks)
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<any>()
 
     const addTodolist = useCallback((title: string) => {
-        dispatch(addTodolistAC(title))
+        dispatch(addTodolistTC(title))
     },[dispatch])
 
     const removeTask = useCallback((taskId: string, todolistId: string) => {
@@ -40,7 +46,7 @@ const App: React.FC = () => {
     },[dispatch])
 
     const addTask = useCallback((title: string, todolistId: string) => {
-        dispatch(addTaskAC(title, todolistId))
+        dispatch(addTaskTC(todolistId, title))
     },[dispatch])
     const changeTaskStatus = useCallback((id: string, status: number, todolistId: string) => {
         dispatch(changeTaskStatusAC(id, status, todolistId))
