@@ -1,4 +1,3 @@
-import {v1} from 'uuid';
 import {
     addTaskAC,
     changeTaskStatusAC,
@@ -6,11 +5,11 @@ import {
     removeTaskAC,
     tasksReducer, TasksStateType
 } from './tasksReducer';
-import {addTodolistAC, removeTodolistAC} from './todolistsReducer';
+import {addTodolistAC, removeTodolistAC, setTodolistFromServer} from './todolistsReducer';
 
 let tasks: TasksStateType;
 let todoId1 = 'todolistId1'
-let todoId2 ='todolistId2'
+let todoId2 = 'todolistId2'
 
 beforeEach(() => {
     tasks = {
@@ -40,7 +39,7 @@ test('reducer should delete correct task', () => {
 
 test('reducer should added task to correct todo', () => {
 
-    let newTasks = tasksReducer(tasks, addTaskAC('Meat', todoId2))
+    let newTasks = tasksReducer(tasks, addTaskAC({...defaultTask,title:'Meat'}, todoId2))
 
     expect(newTasks[todoId2].length).toBe(3)
     expect(tasks[todoId2].length).toBe(2)
@@ -66,8 +65,8 @@ test('reducer should change correct task title in correct todo', () => {
 
 
 test('reducer should added empty tasks array', () => {
-    let newTasks = tasksReducer(tasks, addTodolistAC(''))
-    let keys=Object.keys(newTasks)
+    let newTasks = tasksReducer(tasks, addTodolistAC({id:'1',title:'1', addedDate: '1', order:1}))
+    let keys = Object.keys(newTasks)
 
     expect(keys.length).toBe(3)
 
@@ -84,7 +83,7 @@ test('reducer should deleted correct tasks array', () => {
 test('correct task should be added to correct array', () => {
     const startState = {...tasks}
 
-    const action = addTaskAC('juice', 'todolistId2')
+    const action = addTaskAC({...defaultTask, title: 'juice'}, 'todolistId2')
 
     const endState = tasksReducer(startState, action)
 
@@ -102,7 +101,7 @@ test('status of specified task should be changed', () => {
     const action = changeTaskStatusAC('2', 2, 'todolistId2')
 
     const endState = tasksReducer(startState, action)
-0
+
     expect(endState['todolistId2'][1].status).toBe(2)
     expect(startState['todolistId2'][1].status).toBe(0)
 })
@@ -120,4 +119,13 @@ test('property with todolistId should be deleted', () => {
 
     expect(keys.length).toBe(1)
     expect(endState['todolistId2']).not.toBeDefined()
+})
+
+test('reducer should add new empty array for keys', () => {
+    let newTasks = tasksReducer({}, setTodolistFromServer([{id: 'testId', order: 0, addedDate: '0', title: 'test'}]))
+    let keys = Object.keys(newTasks)
+
+    expect(keys.length).toBe(1)
+    expect(keys[0]).toBe('testId')
+    expect(newTasks['testId'].length).toBe(0)
 })

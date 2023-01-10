@@ -1,5 +1,10 @@
-import {v1} from 'uuid';
-import {addTodolistAC, removeTodolistAC, TodolistDomainType, todolistsReducer} from './todolistsReducer';
+import {
+    addTodolistAC,
+    removeTodolistAC,
+    setTodolistFromServer,
+    TodolistDomainType,
+    todolistsReducer
+} from './todolistsReducer';
 import {defaultTask, tasksReducer, TasksStateType} from './tasksReducer';
 
 let todolists: TodolistDomainType[]
@@ -28,7 +33,7 @@ beforeEach(() => {
 
 test('reducers should add new todolist and tasks', () => {
 
-    let newTodo = todolistsReducer(todolists, addTodolistAC('Test'))
+    let newTodo = todolistsReducer(todolists, addTodolistAC({title:'Test',order:1, addedDate:'1', id:'1'}))
     expect(newTodo.length).toBe(3)
 
 })
@@ -44,4 +49,17 @@ test('reducers should delete correct todolist and tasks', () => {
     expect(newTodo[0].id).toBe(todo2)
     expect(keys[0]).toBe(todo2)
 
+})
+
+test('reducer should set todolists and empty tasks', ()=>{
+    let newTodo=todolistsReducer([],setTodolistFromServer(todolists))
+    let newTasks=tasksReducer({}, setTodolistFromServer(todolists))
+
+    let keys=Object.keys(newTasks)
+
+    expect(newTodo.length).toBe(2)
+    expect(keys.length).toBe(2)
+    expect(keys[0]).toBe('todolist1')
+    expect(newTasks['todolist1'].length).toBe(0)
+    expect(newTasks['todolist2'].length).toBe(0)
 })
