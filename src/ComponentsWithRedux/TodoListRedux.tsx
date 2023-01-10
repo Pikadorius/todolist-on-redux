@@ -6,7 +6,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import {
-    changeTodolistFilterAC,
+    changeTodolistFilterAC, changeTodolistTC,
     changeTodolistTitleAC, deleteTodolistTC,
     FilterValuesType,
     TodolistDomainType
@@ -53,7 +53,7 @@ export const TodolistRedux = memo((props: PropsType) => {
         dispatch(deleteTodolistTC(todoId))
     }
     const changeTodolistTitle = (title: string) => {
-        dispatch(changeTodolistTitleAC(todoId, title))
+        dispatch(changeTodolistTC(todoId, title))
     }
 
     const filterHandler = (filter: FilterValuesType) => () => dispatch(changeTodolistFilterAC(filter, todoId))
