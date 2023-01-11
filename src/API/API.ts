@@ -37,13 +37,13 @@ export const todolistsAPI = {
 export type TaskType = {
     id: string
     title: string
-    description: string | null
+    description: string
     todoListId: string
     order: number
     status: TaskStatuses
     priority: TaskPriorities
-    startDate: string | null
-    deadline: string | null
+    startDate: string
+    deadline: string
 }
 
 export enum TaskStatuses {
@@ -64,11 +64,19 @@ export enum TaskPriorities {
 export type UpdateTaskType = {
     title: string
     description: string
-    completed: boolean
     status: TaskStatuses
     priority: TaskPriorities
     startDate: string
     deadline: string
+}
+
+export type UpdateDomianTaskType = {
+    title?: string
+    description?: string
+    status?: TaskStatuses
+    priority?: TaskPriorities
+    startDate?: string
+    deadline?: string
 }
 
 type GetTasksResponseType = {
@@ -81,7 +89,7 @@ type GetTasksResponseType = {
 export const tasksAPI = {
     getTasks: (todolistId: string) => axiosInstanse.get<GetTasksResponseType>(`/todo-lists/${todolistId}/tasks`),
     createTask: (todolistId: string, title: string) => axiosInstanse.post<ResponseType<{ item: TaskType }>>(`/todo-lists/${todolistId}/tasks`, {title}).then(res=>res.data),
-    updateTask: (todolistId: string, taskId: string, task: UpdateTaskType) => axiosInstanse.put<ResponseType<{ item: TaskType }>>(`/todo-lists/${todolistId}/tasks/${taskId}`, {task}),
+    updateTask: (todolistId: string, taskId: string, task: UpdateTaskType) => axiosInstanse.put<ResponseType<{ item: TaskType }>>(`/todo-lists/${todolistId}/tasks/${taskId}`, task),
     deleteTask: (todolistId: string, taskId: string) => axiosInstanse.delete<ResponseType>(`/todo-lists/${todolistId}/tasks/${taskId}`),
     reorderTasks: (todolistId: string, taskId: string, target: string | null) => axiosInstanse.put(`/todo-lists/${todolistId}/tasks/${taskId}/reorder?putAfterItemId=${target}`)
 }

@@ -1,7 +1,6 @@
 import {
     addTaskAC,
-    changeTaskStatusAC,
-    changeTaskTitleAC, defaultTask,
+    changeTaskAC, defaultTask,
     removeTaskAC,
     tasksReducer, TasksStateType
 } from './tasksReducer';
@@ -49,7 +48,7 @@ test('reducer should added task to correct todo', () => {
 
 test('reducer should change correct task status in correct todo', () => {
 
-    let newTasks = tasksReducer(tasks, changeTaskStatusAC('2', 2, todoId2))
+    let newTasks = tasksReducer(tasks, changeTaskAC('2', {status: 2}, todoId2))
 
     expect(newTasks[todoId2][1].status).toBe(2)
     expect(tasks[todoId2][1].status).toBe(0)
@@ -57,7 +56,7 @@ test('reducer should change correct task status in correct todo', () => {
 
 test('reducer should change correct task title in correct todo', () => {
 
-    let newTasks = tasksReducer(tasks, changeTaskTitleAC('2', 'React', todoId1))
+    let newTasks = tasksReducer(tasks, changeTaskAC('2', {title:'React'}, todoId1))
 
     expect(newTasks[todoId1][1].title).toBe('React')
     expect(tasks[todoId1][1].title).toBe('JS')
@@ -98,7 +97,7 @@ test('correct task should be added to correct array', () => {
 test('status of specified task should be changed', () => {
     const startState = {...tasks}
 
-    const action = changeTaskStatusAC('2', 2, 'todolistId2')
+    const action = changeTaskAC('2', {status: 2}, 'todolistId2')
 
     const endState = tasksReducer(startState, action)
 

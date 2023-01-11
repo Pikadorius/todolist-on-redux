@@ -4,7 +4,10 @@ import {EditableSpan} from '../EditableSpan';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import {useDispatch} from 'react-redux';
-import {changeTaskStatusAC, changeTaskTitleAC, deleteTaskTC} from '../reducers/tasksReducer';
+import {
+    deleteTaskTC,
+    updateTaskTC
+} from '../reducers/tasksReducer';
 import {TaskType} from '../API/API';
 
 type TaskPropsType = {
@@ -21,10 +24,11 @@ const Task = memo((props: TaskPropsType) => {
     const deleteTask = () => dispatch(deleteTaskTC(props.todolistId, props.task.id))
     const changeTaskStatus = (e: ChangeEvent<HTMLInputElement>) => {
         let newStatus = e.currentTarget.checked ? 2 : 0;
-        dispatch(changeTaskStatusAC(props.task.id, newStatus, props.todolistId))
+        dispatch(updateTaskTC(props.todolistId, props.task.id, {status: newStatus}))
     }
     const changeTaskTitle = (newValue: string) => {
-        dispatch(changeTaskTitleAC(props.task.id, newValue, props.todolistId))
+        dispatch(updateTaskTC(props.todolistId, props.task.id, {title: newValue}))
+
     }
 
     return (
