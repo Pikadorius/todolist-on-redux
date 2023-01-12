@@ -96,7 +96,7 @@ export const setTodolistFromServer = (data: TodolistType[]) => {
     } as const
 }
 
-export const fetchTodolists = () => (dispatch: Dispatch) => {
+export const fetchTodolists =()=> (dispatch: Dispatch) => {
     todolistsAPI.getAllTodolists().then(res => {
         dispatch(setTodolistFromServer(res))
     })

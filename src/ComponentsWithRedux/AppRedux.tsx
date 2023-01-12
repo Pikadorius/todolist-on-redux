@@ -5,19 +5,19 @@ import ButtonAppBar from '../ButtonAppBar';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
-import {useDispatch, useSelector} from 'react-redux';
+import { useSelector} from 'react-redux';
 import {
      addTodolistTC, fetchTodolists,
     TodolistDomainType
 } from '../reducers/todolistsReducer';
-import { AppRootState,} from '../redux/store';
+import {AppRootState, useAppDispatch,} from '../redux/store';
 import {TodolistRedux} from './TodoListRedux';
 
 const App: React.FC = () => {
     console.log('AppWithRedux rendering...')
     // const tasks=useSelector<AppRootState, TasksStateType>(state => state.tasks)
     const todolists = useSelector<AppRootState, TodolistDomainType[]>(state => state.todolists)
-    const dispatch = useDispatch<any>()
+    const dispatch = useAppDispatch()
 
     useEffect(() => {
         /*todolistsAPI.getAllTodolists().then(res => {
