@@ -170,3 +170,20 @@ export const updateTaskTC = (todolistId: string, taskId: string, domainModel: Up
         dispatch(changeTaskAC(taskId, res.data.data.item, todolistId))
     })
 }
+
+
+export const updateTaskTC2 = (todolistId: string, taskId: string, domainModel: UpdateDomianTaskType, task: TaskType) => (dispatch: Dispatch, getState: () => AppRootState) => {
+
+    const model: UpdateTaskType = {
+        title: task.title,
+        status: task.status,
+        deadline: task.deadline,
+        description: task.description,
+        priority: task.priority,
+        startDate: task.startDate,
+        ...domainModel
+    }
+    tasksAPI.updateTask(todolistId, taskId, model).then(res => {
+        dispatch(changeTaskAC(taskId, res.data.data.item, todolistId))
+    })
+}

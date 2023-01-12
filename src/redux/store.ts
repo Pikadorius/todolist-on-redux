@@ -13,17 +13,16 @@ const rootReducer = combineReducers({
 // type of state
 export type AppRootState = ReturnType<typeof rootReducer>
 
+// middleWare for thunk
 const enchanced=applyMiddleware(thunkMiddleware)
 // create store with Redux method
 const store = legacy_createStore(rootReducer, enchanced)
 
 
-export type ActionsType = TodoActionsType & TasksActionsType
-
 
 //explanation from redux-tookit docs
 export type AppDispatchType = ThunkDispatch<AppRootState, any, AnyAction>
-
+// custom useDispatch
 export const useAppDispatch = () => useDispatch<AppDispatchType>()
 
 // @ts-ignore

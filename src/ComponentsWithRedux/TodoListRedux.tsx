@@ -1,4 +1,4 @@
-import React, {memo, useCallback, useEffect} from 'react';
+import React, {memo, useCallback, useEffect, useState} from 'react';
 import {AddItemForm} from '../AddItemForm';
 import {EditableSpan} from '../EditableSpan';
 import IconButton from '@mui/material/IconButton';
@@ -51,6 +51,7 @@ export const TodolistRedux = memo((props: PropsType) => {
     const removeTodolist = () => {
         dispatch(deleteTodolistTC(todoId))
     }
+
     const changeTodolistTitle = (title: string) => {
         dispatch(changeTodolistTC(todoId, title))
     }
