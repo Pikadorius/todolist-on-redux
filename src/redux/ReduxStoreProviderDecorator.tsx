@@ -2,8 +2,8 @@ import React from 'react'
 import {Provider} from 'react-redux'
 import {combineReducers, legacy_createStore} from 'redux'
 import {v1} from 'uuid'
-import {defaultTask, tasksReducer, TasksStateType} from '../reducers/tasksReducer';
-import {TodolistDomainType, todolistsReducer} from '../reducers/todolistsReducer';
+import {defaultTask, tasksReducer, TasksStateType} from './reducers/tasksReducer';
+import {TodolistDomainType, todolistsReducer} from './reducers/todolistsReducer';
 import {AppRootState} from './store';
 
 

@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import {todolistsAPI, TodolistType} from '../API/API';
 
 export default {
-    title: 'API/Todolist'
+    title: 'API/Features'
 }
 
 export const GetTodolists = () => {
@@ -46,7 +46,7 @@ export const DeleteTodolist = () => {
 
 
     const onClickHandler = () => {
-        todolistsAPI.deleteTodolist(value.trim()).then(()=>setState('Todolist deleted')).catch(()=>setState('No such todolist'))
+        todolistsAPI.deleteTodolist(value.trim()).then(()=>setState('Features deleted')).catch(()=>setState('No such todolist'))
         setValue('')
     }
 

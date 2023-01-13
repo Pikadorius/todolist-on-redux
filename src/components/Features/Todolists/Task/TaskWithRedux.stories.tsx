@@ -1,13 +1,13 @@
 import {ComponentMeta, ComponentStory} from '@storybook/react';
 import TaskWithRedux from './TaskWithRedux';
 import React from 'react';
-import {ReduxStoreProviderDecorator} from '../redux/ReduxStoreProviderDecorator';
+import {ReduxStoreProviderDecorator} from '../../../../redux/ReduxStoreProviderDecorator';
 import {useSelector} from 'react-redux';
-import {AppRootState} from '../redux/store';
-import {TaskType} from '../API/API';
+import {AppRootState} from '../../../../redux/store';
+import {TaskType} from '../../../../API/API';
 
 export default {
-    title: 'Todolist/TaskWithRedux',
+    title: 'Features/TaskWithRedux',
     component: TaskWithRedux,
     decorators: [ReduxStoreProviderDecorator]
 } as ComponentMeta<typeof TaskWithRedux>

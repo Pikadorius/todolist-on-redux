@@ -1,5 +1,5 @@
 import {v1} from 'uuid';
-import {todolistsAPI, TodolistType} from '../API/API';
+import {todolistsAPI, TodolistType} from '../../API/API';
 import {Dispatch} from 'redux';
 
 export type FilterValuesType = "all" | "active" | "completed";

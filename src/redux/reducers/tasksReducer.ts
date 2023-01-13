@@ -1,7 +1,7 @@
 import {AddTodolistACType, RemoveTodolistACType, SetTodolistsFromServerACType} from './todolistsReducer';
-import {TaskPriorities, tasksAPI, TaskStatuses, TaskType, UpdateDomianTaskType, UpdateTaskType} from '../API/API';
+import {TaskPriorities, tasksAPI, TaskStatuses, TaskType, UpdateDomianTaskType, UpdateTaskType} from '../../API/API';
 import {Dispatch} from 'redux';
-import {AppRootState} from '../redux/store';
+import {AppRootState} from '../store';
 import {throws} from 'assert';
 
 export const defaultTask: TaskType = {
@@ -37,10 +37,7 @@ export const tasksReducer = (state = inititalState, action: TasksActionsType): T
             return {...state, [action.payload.todolistId]: [action.payload.task, ...state[action.payload.todolistId]]}
         }
         case 'REMOVE-TASK': {
-            return {
-                ...state,
-                [action.payload.todolistId]: state[action.payload.todolistId].filter(t => t.id !== action.payload.id)
-            }
+            return {...state, [action.payload.todolistId]: state[action.payload.todolistId].filter(t => t.id !== action.payload.id)}
         }
         case 'UPDATE_TASK': {
             return {
@@ -55,8 +52,9 @@ export const tasksReducer = (state = inititalState, action: TasksActionsType): T
             return {[action.payload.todolist.id]: [], ...state}
         }
         case 'REMOVE-TODOLIST': {
-            delete state[action.payload.id]
-            return {...state}
+            const copyState = {...state}
+            delete copyState[action.payload.id]
+            return {...copyState}
         }
         case 'SET_TODOLISTS': {
             return action.payload.data.reduce((res: TasksStateType, t) => {

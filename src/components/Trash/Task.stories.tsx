@@ -2,12 +2,12 @@ import Task from './Task';
 import {action} from '@storybook/addon-actions';
 import React, {useState} from 'react';
 import {ComponentMeta, ComponentStory} from '@storybook/react';
-import {ReduxStoreProviderDecorator} from './redux/ReduxStoreProviderDecorator';
-import {defaultTask} from './reducers/tasksReducer';
-import {TaskStatuses, TaskType} from './API/API';
+import {ReduxStoreProviderDecorator} from '../../redux/ReduxStoreProviderDecorator';
+import {defaultTask} from '../../redux/reducers/tasksReducer';
+import {TaskStatuses, TaskType} from '../../API/API';
 
 export default {
-    title: 'Todolist/Task',
+    title: 'Features/Task',
     component: Task,
     args: {
         task: {

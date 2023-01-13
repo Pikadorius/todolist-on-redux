@@ -1,14 +1,14 @@
 import React, {ChangeEvent, memo} from 'react';
 import Checkbox from '@mui/material/Checkbox';
-import {EditableSpan} from '../EditableSpan';
+import {EditableSpan} from '../../../EditableSpan/EditableSpan';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import {
     deleteTaskTC,
     updateTaskTC
-} from '../reducers/tasksReducer';
-import {TaskType} from '../API/API';
-import {useAppDispatch} from '../redux/store';
+} from '../../../../redux/reducers/tasksReducer';
+import {TaskType} from '../../../../API/API';
+import {useAppDispatch} from '../../../../redux/store';
 
 type TaskPropsType = {
     task: TaskType

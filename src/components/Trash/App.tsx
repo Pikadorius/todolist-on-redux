@@ -1,8 +1,8 @@
 import React, { useCallback} from 'react';
-import './App.css';
+import '../App/App.css';
 import {Todolist} from './TodoList';
-import {AddItemForm} from './AddItemForm';
-import ButtonAppBar from './ButtonAppBar';
+import {AddItemForm} from '../AddItemForm/AddItemForm';
+import ButtonAppBar from '../ButtonAppBar/ButtonAppBar';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
@@ -14,14 +14,14 @@ import {
     FilterValuesType,
     removeTodolistAC,
     TodolistDomainType
-} from './reducers/todolistsReducer';
-import {AppRootState} from './redux/store';
+} from '../../redux/reducers/todolistsReducer';
+import {AppRootState} from '../../redux/store';
 import {
     addTaskTC,
     changeTaskAC,
     removeTaskAC,
     TasksStateType
-} from './reducers/tasksReducer';
+} from '../../redux/reducers/tasksReducer';
 
 
 const App: React.FC = () => {

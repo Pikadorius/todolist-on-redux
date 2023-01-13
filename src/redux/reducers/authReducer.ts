@@ -1,5 +1,5 @@
 import {Dispatch} from 'redux';
-import {authAPI} from '../API/API';
+import {authAPI} from '../../API/API';
 
 export type InitialStatetype = {
     id: number
