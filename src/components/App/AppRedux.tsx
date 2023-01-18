@@ -11,11 +11,12 @@ import {
     TodolistDomainType
 } from '../../redux/reducers/todolistsReducer';
 import {AppRootState, useAppDispatch,} from '../../redux/store';
-import {TodolistRedux} from '../Features/Todolists/TodoListRedux';
+import {TodolistRedux} from '../Features/Todolists/Todolist/TodoListRedux';
+import Todolists from '../Features/Todolists/Todolists';
 
 const App: React.FC = () => {
     console.log('AppWithRedux rendering...')
-    // const tasks=useSelector<AppRootState, TasksStateType>(state =
+
     const dispatch = useAppDispatch()
 
     const addTodolist = useCallback((title: string) => {
@@ -37,30 +38,5 @@ const App: React.FC = () => {
     );
 }
 
-
-const Todolists = () => {
-    const todolists = useSelector<AppRootState, TodolistDomainType[]>(state => state.todolists)
-    const dispatch = useAppDispatch()
-
-    useEffect(() => {
-        /*todolistsAPI.getAllTodolists().then(res => {
-            dispatch(setTodolistFromServer(res))
-        })*/
-        dispatch(fetchTodolists())
-    }, [])
-
-    return <Grid container spacing={3}>
-        {
-            todolists.map(tl => {
-                return <Grid item key={tl.id}>
-                    <Paper elevation={3} style={{padding: '20px'}}>
-                        <TodolistRedux todolist={tl}/>
-                    </Paper>
-                </Grid>
-            })
-        }
-    </Grid>
-}
-
-
 export default App;
+
