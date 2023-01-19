@@ -1,6 +1,6 @@
 import {v1} from "uuid";
 import {
-    addTodolistAC,
+    addTodolistAC, changeTodolistEntityStatus,
     changeTodolistFilterAC,
     changeTodolistTitleAC,
     removeTodolistAC, setTodolistFromServer, TodolistDomainType,
@@ -15,8 +15,8 @@ let todolistId2 = v1()
 beforeEach(() => {
 
     todolists = [
-        {id: todolistId1, title: "What to learn", filter: "all", order: 0, addedDate: ''},
-        {id: todolistId2, title: "What to buy", filter: "all", order: 0, addedDate: ''}
+        {id: todolistId1, title: "What to learn", filter: "all", order: 0, addedDate: '', entityStatus: 'idle'},
+        {id: todolistId2, title: "What to buy", filter: "all", order: 0, addedDate: '', entityStatus: 'idle'}
     ]
 })
 
@@ -55,6 +55,16 @@ test('reducer should change correct todolist title', () => {
 
     expect(todolists[0].title).toBe('What to learn')
     expect(todolists[1].title).toBe('What to buy')
+})
+
+test('reducer should change correct todolist entityStatus', () => {
+    let newTodos = todolistsReducer(todolists, changeTodolistEntityStatus(todolistId1, 'loading'))
+
+    expect(newTodos[0].entityStatus).toBe('loading')
+    expect(newTodos[1].entityStatus).toBe('idle')
+
+    expect(todolists[0].entityStatus).toBe('idle')
+    expect(todolists[1].entityStatus).toBe('idle')
 })
 
 test('reducer should set todolists', () => {

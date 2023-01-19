@@ -30,6 +30,7 @@ type PropsType = {
     changeTodolistTitle: (id: string, newTitle: string) => void
     filter: FilterValuesType
     changeTaskTitle: (taskId: string, newTitle: string, todolistId: string) => void
+    demo?:boolean
 }
 
 export const Todolist = memo(function (props: PropsType) {

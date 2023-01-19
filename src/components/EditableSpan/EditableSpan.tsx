@@ -4,9 +4,10 @@ import React, {ChangeEvent, memo, useState} from 'react';
 type EditableSpanPropsType = {
     value: string
     onChange: (newValue: string) => void
+    disabled?:boolean
 }
 
-export const EditableSpan = memo((props: EditableSpanPropsType)=> {
+export const EditableSpan = memo(({disabled=false,...props}: EditableSpanPropsType)=> {
     console.log('EditableSpan rendering')
 
     let [editMode, setEditMode] = useState(false);

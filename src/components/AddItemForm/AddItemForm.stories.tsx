@@ -23,6 +23,13 @@ AddItemFormStory.args = {
     addItem: action('Button "+" clicked')
 }
 
+export  const DisabledAddItemForm = Template.bind({})
+DisabledAddItemForm.args = {
+    addItem: action('Button "+" clicked'),
+    disabled: true
+}
+
+
 /*
 export const AddItemFormBaseExample = () => {
     const [state, setState] = useState<string[]>([])

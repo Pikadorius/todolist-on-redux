@@ -14,8 +14,8 @@ let todo2 = 'todolist2'
 
 beforeEach(() => {
     todolists = [
-        {id: todo1, title: "What to learn", filter: "all", order: 0, addedDate: ''},
-        {id: todo2, title: "What to buy", filter: "all", order: 0, addedDate: ''}
+        {id: todo1, title: "What to learn", filter: "all", order: 0, addedDate: '', entityStatus: 'idle'},
+        {id: todo2, title: "What to buy", filter: "all", order: 0, addedDate: '', entityStatus: 'idle'}
     ]
 
     tasks = {

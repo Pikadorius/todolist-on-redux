@@ -5,16 +5,16 @@ import ButtonAppBar from '../ButtonAppBar/ButtonAppBar';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
-import {useSelector} from 'react-redux';
-import {
-    addTodolistTC, fetchTodolists,
-    TodolistDomainType
-} from '../../redux/reducers/todolistsReducer';
-import {AppRootState, useAppDispatch,} from '../../redux/store';
-import {TodolistRedux} from '../Features/Todolists/Todolist/TodoListRedux';
+import {addTodolistTC} from '../../redux/reducers/todolistsReducer';
+import {useAppDispatch} from '../../redux/store';
 import Todolists from '../Features/Todolists/Todolists';
+import {ErrorSnackbar} from '../ErrorSnackbar/ErrorSnackbar';
 
-const App: React.FC = () => {
+type AppType = {
+    demo?: boolean
+}
+
+const App: React.FC<AppType> = ({demo = false}) => {
     console.log('AppWithRedux rendering...')
 
     const dispatch = useAppDispatch()
@@ -32,8 +32,9 @@ const App: React.FC = () => {
                         <AddItemForm addItem={addTodolist}/>
                     </Paper>
                 </Grid>
-                <Todolists/>
+                <Todolists demo={demo}/>
             </Container>
+            <ErrorSnackbar/>
         </div>
     );
 }

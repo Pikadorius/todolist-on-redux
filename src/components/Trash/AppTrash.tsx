@@ -24,7 +24,7 @@ import {
 } from '../../redux/reducers/tasksReducer';
 
 
-const App: React.FC = () => {
+const AppWithOutRedux: React.FC = () => {
     console.log(`App rendering`)
 
     // так как доступ к таскам и тудулистам в App - апп рендерится при любом изменении
@@ -102,4 +102,4 @@ const App: React.FC = () => {
     );
 }
 
-export default App;
+export default AppWithOutRedux;

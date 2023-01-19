@@ -7,12 +7,15 @@ import Paper from '@mui/material/Paper';
 import {TodolistRedux} from './Todolist/TodoListRedux';
 
 
-const Todolists = () => {
+const Todolists = ({demo=false}:{demo?:boolean}) => {
     const todolists = useSelector<AppRootState, TodolistDomainType[]>(state => state.todolists)
     const dispatch = useAppDispatch()
 
     useEffect(() => {
-        dispatch(fetchTodolists())
+        if (!demo) {
+            dispatch(fetchTodolists())
+        }
+        else return;
     }, [])
 
     return <Grid container spacing={3}>
@@ -20,7 +23,7 @@ const Todolists = () => {
             todolists.map(tl => {
                 return <Grid item key={tl.id}>
                     <Paper elevation={3} style={{padding: '20px'}}>
-                        <TodolistRedux todolist={tl}/>
+                        <TodolistRedux todolist={tl} demo={demo}/>
                     </Paper>
                 </Grid>
             })

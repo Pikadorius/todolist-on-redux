@@ -19,9 +19,10 @@ import {TaskStatuses} from '../../../../API/API';
 
 type PropsType = {
     todolist: TodolistDomainType
+    demo?:boolean
 }
 
-export const TodolistRedux = memo((props: PropsType) => {
+export const TodolistRedux = memo(({demo=false,...props}: PropsType) => {
     console.log(`${props.todolist.id} rendering. ${props.todolist.filter}`)
     const {id: todoId, filter, title} = props.todolist
     // const tasks=useSelector<AppRootState, TaskType[]>(state => state.tasks[props.id])  // another variant
@@ -30,7 +31,10 @@ export const TodolistRedux = memo((props: PropsType) => {
     const dispatch =useAppDispatch()
 
     useEffect(() => {
-        dispatch(fetchTasksForTodolist(props.todolist.id))
+        if (!demo) {
+            dispatch(fetchTasksForTodolist(props.todolist.id))
+        }
+        else return;
     }, [])
 
 
@@ -60,11 +64,11 @@ export const TodolistRedux = memo((props: PropsType) => {
 
     return <div>
         <h3><EditableSpan value={title} onChange={changeTodolistTitle}/>
-            <IconButton aria-label="delete" onClick={removeTodolist}>
+            <IconButton aria-label="delete" onClick={removeTodolist} disabled={props.todolist.entityStatus==='loading'}>
                 <DeleteIcon/>
             </IconButton>
         </h3>
-        <AddItemForm addItem={addTask}/>
+        <AddItemForm addItem={addTask} disabled={props.todolist.entityStatus==='loading'}/>
         <ul>
             {
                 filteredTasks.map(t => {
