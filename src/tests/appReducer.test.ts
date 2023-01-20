@@ -1,4 +1,4 @@
-import {appReducer, InitialStateType, setAppErrorAC, setAppStatusAC} from './appReducer';
+import {appReducer, InitialStateType, setAppErrorAC, setAppStatusAC} from '../components/App/appReducer';
 
 let initialState: InitialStateType;
 

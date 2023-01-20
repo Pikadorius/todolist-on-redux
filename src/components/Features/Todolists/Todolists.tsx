@@ -1,6 +1,6 @@
 import {useSelector} from 'react-redux';
 import {AppRootState, useAppDispatch} from '../../../redux/store';
-import {fetchTodolists, TodolistDomainType} from '../../../redux/reducers/todolistsReducer';
+import {fetchTodolists, TodolistDomainType} from './todolistsReducer';
 import React, {useEffect} from 'react';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';

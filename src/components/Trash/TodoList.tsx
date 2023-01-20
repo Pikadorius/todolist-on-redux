@@ -1,11 +1,11 @@
 import React, {memo, useCallback} from 'react';
-import {AddItemForm} from '../AddItemForm/AddItemForm';
-import {EditableSpan} from '../EditableSpan/EditableSpan';
+import {AddItemForm} from '../common/AddItemForm/AddItemForm';
+import {EditableSpan} from '../common/EditableSpan/EditableSpan';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
-import {FilterValuesType} from '../../redux/reducers/todolistsReducer';
+import {FilterValuesType} from '../Features/Todolists/todolistsReducer';
 import Task from './Task';
 import {TaskType} from '../../API/API';
 

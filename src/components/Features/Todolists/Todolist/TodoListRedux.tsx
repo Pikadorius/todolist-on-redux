@@ -1,6 +1,6 @@
 import React, {memo, useCallback, useEffect, useState} from 'react';
-import {AddItemForm} from '../../../AddItemForm/AddItemForm';
-import {EditableSpan} from '../../../EditableSpan/EditableSpan';
+import {AddItemForm} from '../../../common/AddItemForm/AddItemForm';
+import {EditableSpan} from '../../../common/EditableSpan/EditableSpan';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Button from '@mui/material/Button';
@@ -9,10 +9,10 @@ import {
     changeTodolistFilterAC, changeTodolistTC, deleteTodolistTC,
     FilterValuesType,
     TodolistDomainType
-} from '../../../../redux/reducers/todolistsReducer';
+} from '../todolistsReducer';
 import { useSelector} from 'react-redux';
 import {useAppDispatch, AppRootState} from '../../../../redux/store';
-import {addTaskTC, fetchTasksForTodolist} from '../../../../redux/reducers/tasksReducer';
+import {addTaskTC, fetchTasksForTodolist} from '../tasksReducer';
 import TaskWithRedux from '../Task/TaskWithRedux';
 import {TaskStatuses} from '../../../../API/API';
 
@@ -72,7 +72,7 @@ export const TodolistRedux = memo(({demo=false,...props}: PropsType) => {
         <ul>
             {
                 filteredTasks.map(t => {
-                    return <TaskWithRedux key={t.id} task={t} todolistId={props.todolist.id}/>
+                    return <TaskWithRedux key={t.id} task={t} todolistId={props.todolist.id} disabled={props.todolist.entityStatus==='loading'}/>
                 })
             }
         </ul>

@@ -6,13 +6,9 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-import LinearProgress from '@mui/material/LinearProgress';
-import {useAppSelector} from '../../redux/store';
-import {RequestStatusType} from '../../redux/reducers/appReducer';
 
 export default function ButtonAppBar() {
 
-    const status:RequestStatusType = useAppSelector(state => state.app.status)
 
     return (
         <Box sx={{flexGrow: 1}}>
@@ -28,11 +24,10 @@ export default function ButtonAppBar() {
                         <MenuIcon/>
                     </IconButton>
                     <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
-                        Todos on Redux
+                        Todolists
                     </Typography>
                     <Button color="inherit">Login</Button>
                 </Toolbar>
-                {status === 'loading' && <LinearProgress/>}
             </AppBar>
         </Box>
     );

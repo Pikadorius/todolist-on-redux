@@ -4,8 +4,8 @@ import {
     setTodolistFromServer,
     TodolistDomainType,
     todolistsReducer
-} from './todolistsReducer';
-import {defaultTask, tasksReducer, TasksStateType} from './tasksReducer';
+} from '../components/Features/Todolists/todolistsReducer';
+import {defaultTask, tasksReducer, TasksStateType} from '../components/Features/Todolists/tasksReducer';
 
 let todolists: TodolistDomainType[]
 let tasks: TasksStateType

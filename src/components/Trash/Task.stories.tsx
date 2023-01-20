@@ -3,7 +3,7 @@ import {action} from '@storybook/addon-actions';
 import React, {useState} from 'react';
 import {ComponentMeta, ComponentStory} from '@storybook/react';
 import {ReduxStoreProviderDecorator} from '../../redux/ReduxStoreProviderDecorator';
-import {defaultTask} from '../../redux/reducers/tasksReducer';
+import {defaultTask} from '../Features/Todolists/tasksReducer';
 import {TaskStatuses, TaskType} from '../../API/API';
 
 export default {

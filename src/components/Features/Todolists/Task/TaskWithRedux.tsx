@@ -1,18 +1,19 @@
 import React, {ChangeEvent, memo} from 'react';
 import Checkbox from '@mui/material/Checkbox';
-import {EditableSpan} from '../../../EditableSpan/EditableSpan';
+import {EditableSpan} from '../../../common/EditableSpan/EditableSpan';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import {
     deleteTaskTC,
     updateTaskTC
-} from '../../../../redux/reducers/tasksReducer';
+} from '../tasksReducer';
 import {TaskType} from '../../../../API/API';
 import {useAppDispatch} from '../../../../redux/store';
 
 type TaskPropsType = {
     task: TaskType
     todolistId: string
+    disabled?:boolean
 }
 
 
@@ -33,9 +34,9 @@ const Task = memo((props: TaskPropsType) => {
 
     return (
         <li className={props.task.status === 2 ? "is-done" : ""}>
-            <Checkbox onChange={changeTaskStatus} checked={props.task.status === 2}/>
-            <EditableSpan value={props.task.title} onChange={changeTaskTitle}/>
-            <IconButton aria-label="delete" onClick={deleteTask}>
+            <Checkbox onChange={changeTaskStatus} checked={props.task.status === 2} disabled={props.disabled}/>
+            <EditableSpan value={props.task.title} onChange={changeTaskTitle} disabled={props.disabled}/>
+            <IconButton aria-label="delete" onClick={deleteTask} disabled={props.disabled}>
                 <DeleteIcon/>
             </IconButton>
         </li>

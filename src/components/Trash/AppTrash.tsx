@@ -1,27 +1,27 @@
 import React, { useCallback} from 'react';
 import '../App/App.css';
 import {Todolist} from './TodoList';
-import {AddItemForm} from '../AddItemForm/AddItemForm';
-import ButtonAppBar from '../ButtonAppBar/ButtonAppBar';
+import {AddItemForm} from '../common/AddItemForm/AddItemForm';
+import ButtonAppBar from '../common/ButtonAppBar/ButtonAppBar';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import {useDispatch, useSelector} from 'react-redux';
 import {
-     addTodolistTC,
+     createTodolistTC,
     changeTodolistFilterAC,
     changeTodolistTitleAC,
     FilterValuesType,
     removeTodolistAC,
     TodolistDomainType
-} from '../../redux/reducers/todolistsReducer';
+} from '../Features/Todolists/todolistsReducer';
 import {AppRootState} from '../../redux/store';
 import {
     addTaskTC,
     changeTaskAC,
     removeTaskAC,
     TasksStateType
-} from '../../redux/reducers/tasksReducer';
+} from '../Features/Todolists/tasksReducer';
 
 
 const AppWithOutRedux: React.FC = () => {
@@ -33,7 +33,7 @@ const AppWithOutRedux: React.FC = () => {
     const dispatch = useDispatch<any>()
 
     const addTodolist = useCallback((title: string) => {
-        dispatch(addTodolistTC(title))
+        dispatch(createTodolistTC(title))
     },[dispatch])
 
     const removeTask = useCallback((taskId: string, todolistId: string) => {

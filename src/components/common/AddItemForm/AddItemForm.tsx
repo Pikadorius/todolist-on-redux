@@ -4,10 +4,10 @@ import TextField from '@mui/material/TextField';
 
 type AddItemFormPropsType = {
     addItem: (title: string) => void
-    disabled?:boolean
+    disabled?: boolean
 }
 
-export const AddItemForm = memo(({disabled=false,addItem}: AddItemFormPropsType) => {
+export const AddItemForm = memo(({disabled = false, addItem}: AddItemFormPropsType) => {
     console.log('AddItemForm rendering...')
     let [title, setTitle] = useState("")
     let [error, setError] = useState<string | null>(null)
@@ -26,7 +26,7 @@ export const AddItemForm = memo(({disabled=false,addItem}: AddItemFormPropsType)
     }
 
     const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-        error!=null && setError(null);
+        error != null && setError(null);
         if (e.charCode === 13) {
             addItemHandler();
         }
@@ -38,7 +38,8 @@ export const AddItemForm = memo(({disabled=false,addItem}: AddItemFormPropsType)
                    onKeyPress={onKeyPressHandler}
                    className={error ? "error" : "Enter task:"}
                    size={'small'}
-                   error={!!error}/>
+                   error={!!error}
+                   disabled={disabled}/>
         <Button style={{maxWidth: '40px', maxHeight: '40px', minWidth: '40px', minHeight: '40px'}}
                 variant="contained" onClick={addItemHandler} size='small' disabled={disabled}>+</Button>
     </div>

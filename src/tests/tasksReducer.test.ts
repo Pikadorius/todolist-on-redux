@@ -3,8 +3,8 @@ import {
     changeTaskAC, defaultTask,
     removeTaskAC,
     tasksReducer, TasksStateType
-} from './tasksReducer';
-import {addTodolistAC, removeTodolistAC, setTodolistFromServer} from './todolistsReducer';
+} from '../components/Features/Todolists/tasksReducer';
+import {addTodolistAC, removeTodolistAC, setTodolistFromServer} from '../components/Features/Todolists/todolistsReducer';
 
 let tasks: TasksStateType;
 let todoId1 = 'todolistId1'
