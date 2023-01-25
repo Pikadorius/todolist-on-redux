@@ -6,9 +6,18 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
+import {useAppDispatch, useAppSelector} from '../../../redux/store';
+import {logoutTC} from '../../Features/Login/authReducer';
 
 export default function ButtonAppBar() {
 
+    const isLogged = useAppSelector(state => state.auth.isLoggedIn)
+    const nickname = useAppSelector(state => state.auth.login)
+    const dispatch = useAppDispatch()
+
+    const logout = () => {
+        dispatch(logoutTC())
+    }
 
     return (
         <Box sx={{flexGrow: 1}}>
@@ -26,7 +35,9 @@ export default function ButtonAppBar() {
                     <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
                         Todolists
                     </Typography>
-                    <Button color="inherit">Login</Button>
+                    {isLogged ? <div>
+                        <div>{nickname}</div>
+                        <Button color="inherit" onClick={logout}>Logout</Button></div> : <Button color="inherit">Login</Button>}
                 </Toolbar>
             </AppBar>
         </Box>

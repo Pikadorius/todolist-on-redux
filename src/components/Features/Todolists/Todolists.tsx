@@ -21,6 +21,7 @@ const Todolists = ({demo = false}: { demo?: boolean }) => {
 
     useEffect(() => {
         if (!demo || !isLogged) {
+            debugger
             dispatch(fetchTodolists())
         } else return;
     }, [])

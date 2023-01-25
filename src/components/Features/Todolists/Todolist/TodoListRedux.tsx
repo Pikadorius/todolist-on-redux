@@ -15,6 +15,7 @@ import {useAppDispatch, AppRootState, useAppSelector} from '../../../../redux/st
 import {addTaskTC, fetchTasksForTodolist} from '../tasksReducer';
 import TaskWithRedux from '../Task/TaskWithRedux';
 import {TaskStatuses} from '../../../../API/API';
+import {stepClasses} from '@mui/material';
 
 
 type PropsType = {
@@ -29,9 +30,11 @@ export const TodolistRedux = memo(({demo=false,...props}: PropsType) => {
     const selector = (state: AppRootState) => state.tasks[todoId]
     const tasks = useAppSelector(selector)
     const dispatch =useAppDispatch()
+    const isLogged = useAppSelector(state => state.auth.isLoggedIn)
 
     useEffect(() => {
-        if (!demo) {
+        if (!demo || !isLogged) {
+            debugger
             dispatch(fetchTasksForTodolist(props.todolist.id))
         }
         else return;

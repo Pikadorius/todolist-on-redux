@@ -76,3 +76,13 @@ export const loginTC = (data: LoginType) => (dispatch: AppDispatchType) => {
         handleNetworkError(dispatch, e)
     })
 }
+
+export const logoutTC = () => (dispatch: AppDispatchType) => {
+    dispatch(setAppStatusAC('loading'))
+    authAPI.logout().then(res=>{
+        if (res.data.resultCode===0) {
+            dispatch(loggedInAC(false))
+            dispatch(setAppStatusAC('succeeded'))
+        }
+    })
+}

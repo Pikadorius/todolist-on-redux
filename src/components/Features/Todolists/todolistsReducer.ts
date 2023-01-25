@@ -4,6 +4,7 @@ import {Dispatch} from 'redux';
 import {RequestStatusType, setAppErrorAC, setAppStatusAC} from '../../App/appReducer';
 import {AxiosError} from 'axios';
 import {handleAppError, handleNetworkError} from '../../../Utils/utils';
+import {AppDispatchType} from '../../../redux/store';
 
 export type FilterValuesType = "all" | "active" | "completed";
 
@@ -104,7 +105,7 @@ export const deleteTodolistTC = (todolistId: string) => (dispatch: Dispatch) => 
     })
 }
 
-export const createTodolistTC = (title: string) => (dispatch: Dispatch) => {
+export const createTodolistTC = (title: string) => (dispatch: AppDispatchType) => {
     dispatch(setAppStatusAC('loading'))
     todolistsAPI.createTodolist(title).then(res => {
         if (res.data.resultCode === 0) {
