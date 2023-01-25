@@ -72,7 +72,7 @@ export const TodolistRedux = memo(({demo=false,...props}: PropsType) => {
         <ul>
             {
                 filteredTasks.map(t => {
-                    return <TaskWithRedux key={t.id} task={t} todolistId={props.todolist.id} disabled={props.todolist.entityStatus==='loading'}/>
+                    return <TaskWithRedux key={t.id} task={t} todolistId={props.todolist.id} disabled={t.entityStatus==='loading'}/>
                 })
             }
         </ul>
