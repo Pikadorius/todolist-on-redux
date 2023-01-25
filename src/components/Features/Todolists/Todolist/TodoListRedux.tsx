@@ -11,7 +11,7 @@ import {
     TodolistDomainType
 } from '../todolistsReducer';
 import { useSelector} from 'react-redux';
-import {useAppDispatch, AppRootState} from '../../../../redux/store';
+import {useAppDispatch, AppRootState, useAppSelector} from '../../../../redux/store';
 import {addTaskTC, fetchTasksForTodolist} from '../tasksReducer';
 import TaskWithRedux from '../Task/TaskWithRedux';
 import {TaskStatuses} from '../../../../API/API';
@@ -27,7 +27,7 @@ export const TodolistRedux = memo(({demo=false,...props}: PropsType) => {
     const {id: todoId, filter, title} = props.todolist
     // const tasks=useSelector<AppRootState, TaskType[]>(state => state.tasks[props.id])  // another variant
     const selector = (state: AppRootState) => state.tasks[todoId]
-    const tasks = useSelector(selector)
+    const tasks = useAppSelector(selector)
     const dispatch =useAppDispatch()
 
     useEffect(() => {

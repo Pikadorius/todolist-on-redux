@@ -4,22 +4,25 @@ import {TodoActionsType, todolistsReducer} from '../components/Features/Todolist
 import thunkMiddleware, {ThunkDispatch} from 'redux-thunk';
 import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
 import {appReducer} from '../components/App/appReducer';
+import {authReducer} from '../components/Features/Login/authReducer';
 
 
 // combine reducers with Redux method
 const rootReducer = combineReducers({
     tasks: tasksReducer,
     todolists: todolistsReducer,
-    app: appReducer
+    app: appReducer,
+    auth: authReducer
 })
 // type of state
 export type AppRootState = ReturnType<typeof rootReducer>
+
+
 
 // middleWare for thunk
 const enchanced=applyMiddleware(thunkMiddleware)
 // create store with Redux method
 const store = legacy_createStore(rootReducer, enchanced)
-
 
 
 //explanation from redux-tookit docs

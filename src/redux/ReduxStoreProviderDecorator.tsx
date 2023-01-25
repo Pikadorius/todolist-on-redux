@@ -7,6 +7,7 @@ import {TodolistDomainType, todolistsReducer} from '../components/Features/Todol
 import {AppRootState} from './store';
 import {appReducer} from '../components/App/appReducer';
 import thunkMiddleware from 'redux-thunk';
+import {LoginInitialStatetype} from '../components/Features/Login/authReducer';
 
 
 const rootReducer = combineReducers({
@@ -33,7 +34,8 @@ const initialGlobalState: AppRootState = {
     app: {
         status: 'idle',
         error: null
-    }
+    },
+    auth: {} as LoginInitialStatetype
 }
 
 export const storyBookStore = legacy_createStore(rootReducer, initialGlobalState, applyMiddleware(thunkMiddleware))

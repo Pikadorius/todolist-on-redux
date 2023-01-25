@@ -6,7 +6,7 @@ import {Provider} from 'react-redux';
 import App from './components/App/App';
 import {createBrowserRouter, RouterProvider} from 'react-router-dom';
 import Todolists from './components/Features/Todolists/Todolists';
-import {Login} from './components/common/Login/Login';
+import {Login} from './components/Features/Login/Login';
 
 
 const router = createBrowserRouter([
@@ -17,7 +17,7 @@ const router = createBrowserRouter([
         children: [
             {
                 path: "/",
-                element: <Todolists />
+                element: <Todolists />,
             },
             {
                 path: "/login",

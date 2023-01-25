@@ -1,28 +1,35 @@
 import {useSelector} from 'react-redux';
-import {AppRootState, useAppDispatch} from '../../../redux/store';
+import {AppRootState, useAppDispatch, useAppSelector} from '../../../redux/store';
 import {createTodolistTC, fetchTodolists, TodolistDomainType} from './todolistsReducer';
 import React, {useCallback, useEffect} from 'react';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import {TodolistRedux} from './Todolist/TodoListRedux';
 import {AddItemForm} from '../../common/AddItemForm/AddItemForm';
+import {Navigate} from 'react-router-dom';
 
 
-const Todolists = ({demo=false}:{demo?:boolean}) => {
-    const todolists = useSelector<AppRootState, TodolistDomainType[]>(state => state.todolists)
+const Todolists = ({demo = false}: { demo?: boolean }) => {
+    const todolists = useAppSelector(state => state.todolists)
     const dispatch = useAppDispatch()
-
+    const isLogged = useAppSelector(state => state.auth.isLoggedIn)
 
     const addTodolist = useCallback((title: string) => {
         dispatch(createTodolistTC(title))
     }, [])
 
+
     useEffect(() => {
-        if (!demo) {
+        if (!demo || !isLogged) {
             dispatch(fetchTodolists())
-        }
-        else return;
+        } else return;
     }, [])
+
+
+    if (!isLogged) {
+        return <Navigate to={'/login'}/>
+    }
+
 
     return <Grid container spacing={3}>
         <Grid container spacing={-2}>

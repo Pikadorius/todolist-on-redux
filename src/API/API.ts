@@ -96,7 +96,21 @@ export const tasksAPI = {
     reorderTasks: (todolistId: string, taskId: string, target: string | null) => axiosInstanse.put(`/todo-lists/${todolistId}/tasks/${taskId}/reorder?putAfterItemId=${target}`)
 }
 
-export const authAPI = {
-    me: () => axiosInstanse.get('/auth/me').then(response => response.data),
-    authorize: () => axiosInstanse.post(`/auth/login`)
+export type LoginResponseType = {
+    id: number
+    email: string
+    login: string
 }
+
+export type LoginType = {
+    email: string
+    password: string
+    rememberMe?: boolean
+}
+
+export const authAPI = {
+    me: () => axiosInstanse.get<ResponseType<LoginResponseType>>('/auth/me').then(response => response.data),
+    auth: (data: LoginType) => axiosInstanse.post<ResponseType<{ userID?: number }>>(`/auth/login`, data),
+    logout: () => axiosInstanse.delete<ResponseType>(`/auth/login`),
+}
+
