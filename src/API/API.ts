@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {RequestStatusType} from '../components/App/appReducer';
 
 export type TodolistType = {
     id: string
@@ -44,6 +45,7 @@ export type TaskType = {
     priority: TaskPriorities
     startDate: string
     deadline: string
+    entityStatus?: RequestStatusType
 }
 
 export enum TaskStatuses {
