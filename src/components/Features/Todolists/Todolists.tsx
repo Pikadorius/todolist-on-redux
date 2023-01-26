@@ -1,5 +1,4 @@
-import {useSelector} from 'react-redux';
-import {AppRootState, useAppDispatch, useAppSelector} from '../../../redux/store';
+import { useAppDispatch, useAppSelector} from '../../../redux/store';
 import {createTodolistTC, fetchTodolists, TodolistDomainType} from './todolistsReducer';
 import React, {useCallback, useEffect} from 'react';
 import Grid from '@mui/material/Grid';

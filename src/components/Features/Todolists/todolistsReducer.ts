@@ -5,6 +5,7 @@ import {RequestStatusType, setAppErrorAC, setAppStatusAC} from '../../App/appRed
 import {AxiosError} from 'axios';
 import {handleAppError, handleNetworkError} from '../../../Utils/utils';
 import {AppDispatchType} from '../../../redux/store';
+import {fetchTasksForTodolist} from './tasksReducer';
 
 export type FilterValuesType = "all" | "active" | "completed";
 
@@ -80,10 +81,11 @@ export const changeTodolistEntityStatus = (todoId: string, status: RequestStatus
 } as const)
 
 
-export const fetchTodolists = () => (dispatch: Dispatch) => {
+export const fetchTodolists = () => (dispatch: AppDispatchType) => {
     dispatch(setAppStatusAC('loading'))
     todolistsAPI.getAllTodolists().then(res => {
         dispatch(setTodolistFromServer(res))
+        res.forEach((todolist)=> dispatch(fetchTasksForTodolist(todolist.id)))
         dispatch(setAppStatusAC('succeeded'))
     }).catch((e: AxiosError<{ message: string }>) => {
         handleNetworkError(dispatch, e)

@@ -32,13 +32,9 @@ export const TodolistRedux = memo(({demo=false,...props}: PropsType) => {
     const dispatch =useAppDispatch()
     const isLogged = useAppSelector(state => state.auth.isLoggedIn)
 
-    useEffect(() => {
-        if (!demo || !isLogged) {
-            debugger
-            dispatch(fetchTasksForTodolist(props.todolist.id))
-        }
-        else return;
-    }, [])
+    // useEffect(() => {
+    //         dispatch(fetchTasksForTodolist(props.todolist.id))
+    // }, [])
 
 
     let filteredTasks = tasks
