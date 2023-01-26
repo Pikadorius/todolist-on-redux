@@ -61,7 +61,7 @@ export const authMe = () => (dispatch: AppDispatchType) => {
 }
 
 
-export const loginTC = (data: LoginType) => (dispatch: AppDispatchType) => {
+/*export const loginTC2 = (data: LoginType) => (dispatch: AppDispatchType) => {
     dispatch(setAppStatusAC('loading'))
     authAPI.auth(data).then(res => {
         if (res.data.resultCode === 0) {
@@ -75,7 +75,25 @@ export const loginTC = (data: LoginType) => (dispatch: AppDispatchType) => {
     }).catch(e => {
         handleNetworkError(dispatch, e)
     })
+}*/
+
+export const loginTC =  (data: LoginType) => async (dispatch: AppDispatchType) => {
+    dispatch(setAppStatusAC('loading'))
+    try {
+        const res = await authAPI.auth(data)
+        if (res.data.resultCode === 0) {
+            dispatch(loggedInAC(true))
+            dispatch(setAppStatusAC('succeeded'))
+        } else {
+            console.log(res.data)
+            dispatch(setAppErrorAC(res.data.messages[0]))
+            dispatch(setAppStatusAC('failed'))
+        }
+    } catch (e) {
+        handleNetworkError(dispatch, e)
+    }
 }
+
 
 export const logoutTC = () => (dispatch: AppDispatchType) => {
     dispatch(setAppStatusAC('loading'))
